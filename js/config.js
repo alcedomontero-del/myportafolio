@@ -36,4 +36,4 @@ window.CLOUDINARY_CONFIG = {
 // Google Analytics — completar cuando se conecte (ver RESUMEN-PORTAFOLIO.md).
 // Se usa Analytics, nunca Firestore, para contar visitas (regla de
 // seguridad: solo el admin escribe en la base de datos).
-window.GA_MEASUREMENT_ID = "TU_G-QWX14LMC7X"; // ej. "G-XXXXXXXXXX"
+window.GA_MEASUREMENT_ID = "G-CH5CPGMWSV"; // ej. "G-XXXXXXXXXX"
