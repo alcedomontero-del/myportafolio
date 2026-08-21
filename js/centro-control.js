@@ -139,10 +139,26 @@ window.cuandoDBListo(function () {
   async function cargarDiagnostico() {
     grid.innerHTML = '<div class="lcars-estado-vacio"><span class="emoji">🎛️</span>Revisando configuración…</div>';
 
-    const [config, canales] = await Promise.all([
-      window.DB.getConfig(),
-      window.DB.getCanales(),
-    ]);
+    let config, canales;
+    try {
+      [config, canales] = await Promise.all([
+        window.DB.getConfig(),
+        window.DB.getCanales(),
+      ]);
+    } catch (error) {
+      // Antes esto se quedaba congelado en "Revisando configuración…"
+      // para siempre sin avisar nada (promesa rechazada sin atrapar).
+      // Ahora se muestra el error real para poder diagnosticarlo.
+      console.error('Centro de Control — falló la lectura de Firestore:', error);
+      grid.innerHTML = `
+        <div class="lcars-estado-vacio">
+          <span class="emoji">⚠️</span>
+          No se pudo leer la configuración (${escaparHtml(error.code || error.message || 'error desconocido')}).
+          Revisa que firestore.rules esté publicado en la consola de Firebase.
+        </div>`;
+      return;
+    }
+
     const usuario = window.DB.getCurrentUser();
     const ctx = { config, canales, usuario };
 
