@@ -16,13 +16,13 @@
 
 window.FIREBASE_CONFIG = {
 
-  apiKey: "AIzaSyAsGw2l69NPgEo7D_DV8g7xfZT8GmhpgTE",
-  authDomain: "myportafolio-45e59.firebaseapp.com",
-  projectId: "myportafolio-45e59",
-  storageBucket: "myportafolio-45e59.firebasestorage.app",
-  messagingSenderId: "419360187666",
-  appId: "1:419360187666:web:b80a37e3b946cd364b7fcb",
-  measurementId: "G-QWX14LMC7X"
+   apiKey: "AIzaSyChV-F-7Y36-5-iFcPi6GV3zUqe9wWFAVE",
+  authDomain: "myportafolio2.firebaseapp.com",
+  projectId: "myportafolio2",
+  storageBucket: "myportafolio2.firebasestorage.app",
+  messagingSenderId: "505442840848",
+  appId: "1:505442840848:web:f4dfec2518a42804667595",
+  measurementId: "G-CH5CPGMWSV"
 
 };
 
