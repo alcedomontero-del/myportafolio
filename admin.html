@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Panel administrador — Portafolio</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/admin-lcars.css" />
+</head>
+<body class="lcars">
+
+  <div class="lcars-app" id="app-admin" hidden>
+    <aside class="lcars-sidebar">
+      <div class="lcars-sidebar-cierre-superior"></div>
+      <div class="lcars-marca">Cabina de mando</div>
+      <nav class="lcars-nav" id="nav-admin" aria-label="Áreas del panel">
+        <button class="lcars-nav-btn activo" data-area="portafolio">📁 Portafolio</button>
+        <button class="lcars-nav-btn color-purpura" data-area="herramientas">🧰 Herramientas</button>
+        <button class="lcars-nav-btn color-azul" data-area="descargables">📦 Descargables</button>
+        <button class="lcars-nav-btn color-rosa" data-area="canales">🔗 Canales y contacto</button>
+        <button class="lcars-nav-btn color-verde" data-area="control">🎛️ Centro de Control</button>
+      </nav>
+      <div class="lcars-sidebar-pie">
+        <button class="lcars-cerrar-sesion" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="lcars-contenido">
+      <div class="lcars-top-bar">
+        <h1 id="titulo-area">Portafolio</h1>
+        <div id="badge-modo"></div>
+      </div>
+
+      <!-- ---------- Área 1: Portafolio ---------- -->
+      <section class="area-admin" id="area-portafolio" data-titulo="Portafolio">
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">PROYECTOS</span>
+        </div>
+
+        <nav class="lcars-subnav" aria-label="Subsecciones de Portafolio">
+          <button class="lcars-nav-btn activo" data-sub="proyectos" type="button">📁 Proyectos</button>
+          <button class="lcars-nav-btn color-purpura" data-sub="categorias" type="button">🏷️ Categorías</button>
+          <button class="lcars-nav-btn color-azul" data-sub="testimonios" type="button">💬 Testimonios</button>
+        </nav>
+
+        <!-- ---------- Subsección: Proyectos ---------- -->
+        <div class="sub-portafolio" id="sub-proyectos">
+          <div class="lcars-panel">
+            <h2 id="titulo-form-proyecto">Nuevo proyecto</h2>
+            <form id="form-proyecto">
+              <input type="hidden" id="proyecto-id" value="" />
+              <div class="lcars-fila-campos">
+                <div class="lcars-campo">
+                  <label for="proyecto-titulo">Título</label>
+                  <input type="text" id="proyecto-titulo" required />
+                </div>
+                <div class="lcars-campo">
+                  <label for="proyecto-categoria">Categoría</label>
+                  <select id="proyecto-categoria" required></select>
+                </div>
+              </div>
+              <div class="lcars-campo">
+                <label for="proyecto-url">URL real del proyecto</label>
+                <input type="url" id="proyecto-url" placeholder="https://…" />
+              </div>
+              <div class="lcars-campo">
+                <label for="proyecto-imagen">Captura de pantalla</label>
+                <input type="file" id="proyecto-imagen" accept="image/*" />
+                <img class="lcars-preview-imagen" id="proyecto-imagen-preview" alt="Vista previa" />
+              </div>
+              <div class="lcars-campo">
+                <label for="proyecto-necesidad">Qué necesitaba el cliente</label>
+                <textarea id="proyecto-necesidad" required></textarea>
+              </div>
+              <div class="lcars-campo">
+                <label for="proyecto-quehice">Qué hice</label>
+                <textarea id="proyecto-quehice" required></textarea>
+              </div>
+              <div class="lcars-campo">
+                <label for="proyecto-resultado">Resultado</label>
+                <textarea id="proyecto-resultado" required></textarea>
+              </div>
+              <div class="lcars-campo-check">
+                <input type="checkbox" id="proyecto-destacado" />
+                <label for="proyecto-destacado">Destacar este proyecto</label>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="submit" class="lcars-btn lcars-btn-naranja" id="btn-guardar-proyecto">Guardar proyecto</button>
+                <button type="button" class="lcars-btn lcars-btn-fantasma" id="btn-cancelar-proyecto" hidden>Cancelar edición</button>
+              </div>
+            </form>
+          </div>
+          <div class="lcars-lista" id="lista-proyectos"></div>
+        </div>
+
+        <!-- ---------- Subsección: Categorías ---------- -->
+        <div class="sub-portafolio" id="sub-categorias" hidden>
+          <div class="lcars-panel">
+            <h2 id="titulo-form-categoria">Nueva categoría</h2>
+            <form id="form-categoria">
+              <input type="hidden" id="categoria-id" value="" />
+              <div class="lcars-fila-campos">
+                <div class="lcars-campo">
+                  <label for="categoria-emoji">Emoji</label>
+                  <input type="text" id="categoria-emoji" maxlength="4" placeholder="🖥️" required />
+                </div>
+                <div class="lcars-campo">
+                  <label for="categoria-nombre">Nombre</label>
+                  <input type="text" id="categoria-nombre" required />
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="submit" class="lcars-btn lcars-btn-purpura" id="btn-guardar-categoria">Guardar categoría</button>
+                <button type="button" class="lcars-btn lcars-btn-fantasma" id="btn-cancelar-categoria" hidden>Cancelar edición</button>
+              </div>
+            </form>
+          </div>
+          <div class="lcars-lista" id="lista-categorias"></div>
+        </div>
+
+        <!-- ---------- Subsección: Testimonios ---------- -->
+        <div class="sub-portafolio" id="sub-testimonios" hidden>
+          <div class="lcars-panel">
+            <h2 id="titulo-form-testimonio">Nuevo testimonio</h2>
+            <form id="form-testimonio">
+              <input type="hidden" id="testimonio-id" value="" />
+              <div class="lcars-fila-campos">
+                <div class="lcars-campo">
+                  <label for="testimonio-autor">Autor</label>
+                  <input type="text" id="testimonio-autor" required />
+                </div>
+                <div class="lcars-campo">
+                  <label for="testimonio-cargo">Cargo / negocio</label>
+                  <input type="text" id="testimonio-cargo" />
+                </div>
+              </div>
+              <div class="lcars-campo">
+                <label for="testimonio-texto">Texto del testimonio</label>
+                <textarea id="testimonio-texto" required></textarea>
+              </div>
+              <div class="lcars-campo">
+                <label for="testimonio-imagen">Captura de la reseña (opcional)</label>
+                <input type="file" id="testimonio-imagen" accept="image/*" />
+                <img class="lcars-preview-imagen" id="testimonio-imagen-preview" alt="Vista previa" />
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="submit" class="lcars-btn lcars-btn-azul" id="btn-guardar-testimonio">Guardar testimonio</button>
+                <button type="button" class="lcars-btn lcars-btn-fantasma" id="btn-cancelar-testimonio" hidden>Cancelar edición</button>
+              </div>
+            </form>
+          </div>
+          <div class="lcars-lista" id="lista-testimonios"></div>
+        </div>
+      </section>
+
+      <!-- ---------- Área 2: Herramientas ---------- -->
+      <section class="area-admin" id="area-herramientas" data-titulo="Herramientas" hidden>
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">CATÁLOGO</span>
+        </div>
+        <div class="lcars-panel">
+          <p>Activa o desactiva las herramientas que aparecen en el sitio público, y usa las flechas para cambiar el orden en que se muestran.</p>
+        </div>
+        <div class="lcars-lista" id="lista-herramientas"></div>
+      </section>
+
+      <!-- ---------- Área 3: Descargables ---------- -->
+      <section class="area-admin" id="area-descargables" data-titulo="Descargables" hidden>
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">ARCHIVOS</span>
+        </div>
+        <div class="lcars-panel">
+          <p>Sube tu CV real y tus apps/proyectos propios de uso libre. Marca "Este archivo es el CV" en el que corresponda — el sitio público lo muestra aparte, como descarga destacada.</p>
+          <h2 id="titulo-form-descargable">Nuevo archivo</h2>
+          <form id="form-descargable">
+            <input type="hidden" id="descargable-id" value="" />
+            <div class="lcars-campo">
+              <label for="descargable-nombre">Nombre</label>
+              <input type="text" id="descargable-nombre" placeholder="CV — Currículum" required />
+            </div>
+            <div class="lcars-campo">
+              <label for="descargable-descripcion">Descripción</label>
+              <textarea id="descargable-descripcion" required></textarea>
+            </div>
+            <div class="lcars-campo">
+              <label for="descargable-archivo">Archivo (PDF o ZIP)</label>
+              <input type="file" id="descargable-archivo" accept=".pdf,.zip,application/pdf,application/zip" />
+              <span class="lcars-nombre-archivo" id="descargable-archivo-nombre"></span>
+            </div>
+            <div class="lcars-campo-check">
+              <input type="checkbox" id="descargable-es-cv" />
+              <label for="descargable-es-cv">Este archivo es el CV</label>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="submit" class="lcars-btn lcars-btn-azul" id="btn-guardar-descargable">Guardar archivo</button>
+              <button type="button" class="lcars-btn lcars-btn-fantasma" id="btn-cancelar-descargable" hidden>Cancelar edición</button>
+            </div>
+          </form>
+        </div>
+        <div class="lcars-lista" id="lista-descargables"></div>
+      </section>
+
+      <!-- ---------- Área 4: Canales y contacto ---------- -->
+      <section class="area-admin" id="area-canales" data-titulo="Canales y contacto" hidden>
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">PLATAFORMAS</span>
+        </div>
+
+        <div class="lcars-panel">
+          <h2 id="titulo-form-canal">Nueva plataforma</h2>
+          <form id="form-canal">
+            <input type="hidden" id="canal-id" value="" />
+            <div class="lcars-fila-campos">
+              <div class="lcars-campo">
+                <label for="canal-nombre">Nombre de la plataforma</label>
+                <input type="text" id="canal-nombre" placeholder="Fiverr" required />
+              </div>
+              <div class="lcars-campo">
+                <label for="canal-parametro">Parámetro del link (?de=…)</label>
+                <input type="text" id="canal-parametro" placeholder="fiverr" required pattern="[a-z0-9-]+" title="Solo minúsculas, números y guiones" />
+              </div>
+            </div>
+            <div class="lcars-campo">
+              <label for="canal-url">Link al perfil</label>
+              <input type="url" id="canal-url" placeholder="https://fiverr.com/tuusuario" required />
+            </div>
+            <div class="lcars-campo">
+              <label for="canal-texto-boton">Texto del botón</label>
+              <input type="text" id="canal-texto-boton" placeholder="Contáctame en Fiverr" required />
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="submit" class="lcars-btn lcars-btn-rosa" id="btn-guardar-canal">Guardar plataforma</button>
+              <button type="button" class="lcars-btn lcars-btn-fantasma" id="btn-cancelar-canal" hidden>Cancelar edición</button>
+            </div>
+          </form>
+        </div>
+        <div class="lcars-lista" id="lista-canales"></div>
+
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">CONFIGURACIÓN GENERAL</span>
+        </div>
+
+        <div class="lcars-panel">
+          <h2>PayPal y punto de estado</h2>
+          <form id="form-config-canales">
+            <div class="lcars-campo">
+              <label for="config-paypal">Link de PayPal (paypal.me/…)</label>
+              <input type="url" id="config-paypal" placeholder="https://paypal.me/tuusuario" />
+            </div>
+            <div class="lcars-campo-check">
+              <input type="checkbox" id="config-punto-estado" />
+              <label for="config-punto-estado">Mostrar el punto de estado en el sitio público</label>
+            </div>
+            <button type="submit" class="lcars-btn lcars-btn-naranja" id="btn-guardar-config-canales">Guardar configuración</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---------- Área 5: Centro de Control ---------- -->
+      <section class="area-admin" id="area-control" data-titulo="Centro de Control" hidden>
+        <div class="lcars-divisor">
+          <div class="lcars-divisor-codo"></div>
+          <div class="lcars-divisor-barra"></div>
+          <span class="lcars-divisor-numero">DIAGNÓSTICO</span>
+        </div>
+        <div class="lcars-panel">
+          <p>Cada tarjeta revisa una pieza de la configuración real del sitio. Toca una tarjeta ámbar o roja para ver cómo resolverla.</p>
+        </div>
+        <div class="lcars-grid-diagnostico" id="grid-diagnostico"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Se muestra solo mientras se confirma la sesión -->
+  <div class="lcars-arranque" id="verificando">
+    <div class="lcars-arranque-barra"><span></span></div>
+    <p class="lcars-arranque-texto">Verificando acceso…</p>
+  </div>
+
+  <script src="js/env.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/portafolio-admin.js"></script>
+  <script src="js/canales-admin.js"></script>
+  <script src="js/herramientas-admin.js"></script>
+  <script src="js/descargables-admin.js"></script>
+  <script src="js/centro-control.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

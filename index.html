@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alcedo Montero — Desarrollador freelance</title>
+<meta name="description" content="Portafolio de Alcedo Montero: sistemas web, e-commerce y herramientas a medida para negocios que quieren resolver problemas reales." />
+
+<!-- Open Graph — reemplazar la URL de la imagen cuando el dominio esté activo -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Alcedo Montero — Desarrollador freelance" />
+<meta property="og:description" content="Sistemas web, e-commerce y herramientas a medida para negocios que quieren resolver problemas reales." />
+<meta property="og:image" content="assets/og-portada.png" />
+<meta property="og:url" content="https://alcedomontero.do" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="#inicio" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="herramientas.html">Herramientas</a>
+        <a href="descargables.html">Descargables</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="pub-hero" id="inicio">
+      <div class="pub-contenedor">
+        <p class="pub-hero-eyebrow">Desarrollador freelance</p>
+        <h1>Sistemas web que resuelven problemas reales de negocio</h1>
+        <p>Construyo sitios, catálogos y herramientas a medida para negocios pequeños y medianos — desde el primer boceto hasta que el cliente lo usa todos los días.</p>
+        <div class="pub-hero-acciones">
+          <a href="#proyectos" class="pub-btn pub-btn-primario">Ver proyectos</a>
+          <a href="#testimonios" class="pub-btn pub-btn-secundario">Leer testimonios</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pub-seccion" id="proyectos">
+      <div class="pub-contenedor">
+        <h2 class="pub-seccion-titulo">Proyectos</h2>
+        <p class="pub-seccion-sub">Una muestra de trabajos reales — qué necesitaba cada cliente, qué construí y qué resultado obtuvo.</p>
+        <div id="contenedor-proyectos">
+          <div class="pub-estado-carga">
+            <span class="emoji">⏳</span>
+            Cargando proyectos…
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pub-seccion" id="testimonios">
+      <div class="pub-contenedor">
+        <h2 class="pub-seccion-titulo">Lo que dicen los clientes</h2>
+        <p class="pub-seccion-sub">Comentarios reales de personas con las que he trabajado.</p>
+        <div id="contenedor-testimonios">
+          <div class="pub-estado-carga">
+            <span class="emoji">⏳</span>
+            Cargando testimonios…
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pub-seccion" id="contacto">
+      <div class="pub-contenedor">
+        <h2 class="pub-seccion-titulo">Trabajemos juntos</h2>
+        <p class="pub-seccion-sub" id="contacto-sub">Escríbeme por la plataforma que prefieras.</p>
+        <div id="contenedor-contacto">
+          <div class="pub-estado-carga">
+            <span class="emoji">⏳</span>
+            Cargando…
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="js/env.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/comun-publico.js"></script>
+  <script src="js/portafolio-publico.js"></script>
+  <script src="js/canales-publico.js"></script>
+</body>
+</html>

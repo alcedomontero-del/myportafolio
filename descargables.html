@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Descargables — Alcedo Montero</title>
+<meta name="description" content="Descarga mi CV en PDF y apps propias de uso libre — directo, sin registro." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Descargables — Alcedo Montero" />
+<meta property="og:description" content="Descarga mi CV en PDF y apps propias de uso libre — directo, sin registro." />
+<meta property="og:image" content="assets/og-portada.png" />
+<meta property="og:url" content="https://alcedomontero.do/descargables.html" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="index.html#proyectos">Proyectos</a>
+        <a href="herramientas.html">Herramientas</a>
+        <a href="descargables.html">Descargables</a>
+        <a href="index.html#testimonios">Testimonios</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="pub-hero" style="padding-bottom: 24px;">
+      <div class="pub-contenedor">
+        <p class="pub-hero-eyebrow">Gratis · sin registro</p>
+        <h1>Mi CV y apps propias de uso libre</h1>
+        <p>Descarga directa, sin formularios ni esperas.</p>
+      </div>
+    </section>
+
+    <section class="pub-seccion" style="padding-top:0;">
+      <div class="pub-contenedor">
+        <div id="contenedor-descargables">
+          <div class="pub-estado-carga">
+            <span class="emoji">⏳</span>
+            Cargando…
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="js/env.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/comun-publico.js"></script>
+  <script src="js/descargables-publico.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/**
+ * firestore.rules — PORTAFOLIO
+ * ---------------------------------------------------------
+ * Regla general del proyecto: todos pueden LEER (es un portafolio
+ * público), solo el admin autenticado puede ESCRIBIR. Nunca se abre
+ * escritura pública (por eso el contador de visitas usa Analytics
+ * externo y no Firestore — ver RESUMEN-PORTAFOLIO.md).
+ *
+ * Cada colección nueva necesita su propio bloque `match` explícito
+ * (ver LECCIONES.md, caso #5) — Firestore bloquea por defecto
+ * cualquier colección sin regla.
+ * ---------------------------------------------------------
+ */
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /proyectos/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /categorias/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /testimonios/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /herramientas/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /descargables/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /canales/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Documento único: configuracion/sitio (PayPal, punto de estado)
+    match /configuracion/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

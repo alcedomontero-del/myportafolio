@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — solo páginas PÚBLICAS (admin.html y login.html quedan
+  fuera a propósito, no tiene sentido que un buscador las indexe).
+  Si se agrega una herramienta nueva en herramientas/, agregar su URL
+  aquí también.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://alcedomontero.do/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/descargables.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/qr.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/contrasenas.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/contador-texto.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/paleta-colores.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/unidades.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/comprimir-imagen.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/recortar-imagen.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/imagenes-a-pdf.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/pdf-a-imagenes.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/ocr.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/creador-cv.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alcedomontero.do/herramientas/creador-diploma.html</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>
