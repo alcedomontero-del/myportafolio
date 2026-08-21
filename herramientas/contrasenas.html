@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Generador de contraseñas seguras gratis — Alcedo Montero</title>
+<meta name="description" content="Genera contraseñas seguras y aleatorias, 100% en tu navegador. Elige la longitud y qué tipos de caracteres incluir." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🔐</span> Generador de contraseñas seguras</h1>
+        <p>Crea contraseñas aleatorias y fuertes. Ajusta la longitud y qué tipos de caracteres usar.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <form id="form-contrasena">
+          <div class="pub-campo">
+            <label for="pw-longitud">Longitud: <span id="pw-longitud-valor">16</span> caracteres</label>
+            <input type="range" id="pw-longitud" min="6" max="48" value="16" />
+          </div>
+          <div class="pub-fila-campos">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem;">
+              <input type="checkbox" id="pw-mayusculas" checked /> Mayúsculas (A-Z)
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem;">
+              <input type="checkbox" id="pw-minusculas" checked /> Minúsculas (a-z)
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem;">
+              <input type="checkbox" id="pw-numeros" checked /> Números (0-9)
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem;">
+              <input type="checkbox" id="pw-simbolos" checked /> Símbolos (!@#$…)
+            </label>
+          </div>
+          <button type="submit" class="pub-btn pub-btn-primario" id="btn-generar-pw" style="margin-top:8px;">Generar contraseña</button>
+        </form>
+
+        <div class="pub-resultado" id="resultado-pw">
+          <div class="pub-campo">
+            <label for="pw-salida">Tu contraseña</label>
+            <div style="display:flex; gap:10px;">
+              <input type="text" id="pw-salida" readonly style="font-family: var(--pub-fuente-mono); font-size:1.05rem;" />
+              <button type="button" class="pub-btn pub-btn-secundario" id="btn-copiar-pw">Copiar</button>
+            </div>
+          </div>
+          <p id="pw-fortaleza" style="font-size:0.85rem; margin:6px 0 0;"></p>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Cada contraseña se genera con el generador aleatorio criptográfico del navegador — nunca se envía ni se guarda en ningún lado.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/contrasenas.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Convertidor de PDF a imágenes gratis — Alcedo Montero</title>
+<meta name="description" content="Convierte cada página de un PDF en una imagen descargable, 100% en tu navegador." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🖨️</span> Convertidor de PDF a imágenes</h1>
+        <p>Sube un PDF y descarga cada página como una imagen por separado.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <label class="pub-dropzone" id="pdfimg-dropzone" for="pdfimg-archivo">
+          <span class="emoji">📤</span>
+          <p><strong>Haz clic para elegir un PDF</strong> o arrástralo aquí</p>
+          <input type="file" id="pdfimg-archivo" accept="application/pdf" />
+        </label>
+
+        <div id="pdfimg-controles" hidden style="margin-top:18px;">
+          <p style="font-size:0.82rem; color:var(--pub-texto-suave); margin:0 0 14px;" id="pdfimg-info-archivo"></p>
+          <div class="pub-fila-campos">
+            <div class="pub-campo">
+              <label for="pdfimg-formato">Formato</label>
+              <select id="pdfimg-formato">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg" selected>JPEG</option>
+              </select>
+            </div>
+            <div class="pub-campo">
+              <label for="pdfimg-calidad">Nitidez</label>
+              <select id="pdfimg-calidad">
+                <option value="1">Normal (rápido)</option>
+                <option value="2" selected>Alta</option>
+                <option value="3">Muy alta (más lento)</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" class="pub-btn pub-btn-primario" id="btn-pdfimg-convertir">Convertir páginas</button>
+        </div>
+
+        <div class="pub-progreso" id="pdfimg-progreso"><div class="pub-progreso-relleno" id="pdfimg-progreso-relleno"></div></div>
+        <p class="pub-progreso-texto" id="pdfimg-progreso-texto"></p>
+
+        <div class="pub-resultado" id="resultado-pdfimg">
+          <div class="pub-campo">
+            <label>Páginas convertidas</label>
+          </div>
+          <div class="pub-grid-paginas" id="pdfimg-grid-paginas"></div>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Tu PDF nunca sale de este navegador — la conversión ocurre enteramente en tu computadora, no se sube a ningún servidor.
+        </div>
+        <div class="pub-nota-internet">
+          🌐 Esta herramienta necesita conexión a internet la primera vez que la usas en esta pestaña, para descargar el motor que lee el PDF (no para procesar tu archivo — eso ocurre siempre en tu navegador).
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/cargador-librerias.js"></script>
+  <script src="../js/herramientas/pdf-a-imagenes.js"></script>
+</body>
+</html>

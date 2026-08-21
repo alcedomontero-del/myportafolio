@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="oro" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3d488" />
+      <stop offset="45%" stop-color="#c9a24d" />
+      <stop offset="100%" stop-color="#8a6a2c" />
+    </linearGradient>
+    <filter id="marmol" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.010 0.018" numOctaves="3" seed="7" result="ruido" />
+      <feColorMatrix in="ruido" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0.06 0" />
+    </filter>
+    <filter id="brillo-suave" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#05070b" />
+  <rect width="1600" height="900" filter="url(#marmol)" />
+
+  <g fill="none" stroke="url(#oro)" stroke-linecap="round">
+    <path d="M -40 120 L 180 200 L 260 130 L 420 260 L 560 190 L 700 340"
+          stroke-width="2.4" opacity="0.55" />
+    <path d="M -40 120 L 180 200 L 260 130 L 420 260 L 560 190 L 700 340"
+          stroke-width="7" opacity="0.16" filter="url(#brillo-suave)" />
+
+    <path d="M 900 -30 L 860 90 L 970 160 L 940 280 L 1080 330 L 1040 460"
+          stroke-width="1.8" opacity="0.4" />
+    <path d="M 900 -30 L 860 90 L 970 160 L 940 280 L 1080 330 L 1040 460"
+          stroke-width="6" opacity="0.12" filter="url(#brillo-suave)" />
+
+    <path d="M 1300 500 L 1420 560 L 1380 660 L 1560 700 L 1520 820"
+          stroke-width="2.6" opacity="0.5" />
+    <path d="M 1300 500 L 1420 560 L 1380 660 L 1560 700 L 1520 820"
+          stroke-width="8" opacity="0.15" filter="url(#brillo-suave)" />
+
+    <path d="M 100 700 L 240 640 L 300 740 L 460 700 L 520 800 L 700 760"
+          stroke-width="1.6" opacity="0.3" />
+
+    <path d="M 1080 460 L 1200 400 L 1300 500"
+          stroke-width="1.4" opacity="0.28" />
+    <path d="M 420 260 L 480 380 L 380 440"
+          stroke-width="1.2" opacity="0.24" />
+  </g>
+</svg>

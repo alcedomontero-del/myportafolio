@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Extractor de texto desde una imagen (OCR) gratis — Alcedo Montero</title>
+<meta name="description" content="Extrae el texto de una foto o captura de pantalla, 100% en tu navegador." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🔤</span> Extractor de texto desde una imagen</h1>
+        <p>Sube una foto o captura de pantalla con texto y esta herramienta lo reconoce y te lo entrega editable.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <label class="pub-dropzone" id="ocr-dropzone" for="ocr-archivo">
+          <span class="emoji">📤</span>
+          <p><strong>Haz clic para elegir una imagen</strong> o arrástrala aquí<br />JPEG, PNG o WEBP</p>
+          <input type="file" id="ocr-archivo" accept="image/jpeg,image/png,image/webp" />
+        </label>
+
+        <div id="ocr-controles" hidden style="margin-top:18px;">
+          <img id="ocr-vista-previa" alt="Imagen elegida" style="max-width:100%; max-height:260px; border-radius:10px; border:1px solid var(--pub-borde); display:block; margin-bottom:14px;" />
+          <div class="pub-campo">
+            <label for="ocr-idioma">Idioma del texto</label>
+            <select id="ocr-idioma">
+              <option value="spa" selected>Español</option>
+              <option value="eng">Inglés</option>
+              <option value="spa+eng">Español + inglés mezclados</option>
+            </select>
+          </div>
+          <button type="button" class="pub-btn pub-btn-primario" id="btn-ocr-extraer">Extraer texto</button>
+        </div>
+
+        <div class="pub-progreso" id="ocr-progreso"><div class="pub-progreso-relleno" id="ocr-progreso-relleno"></div></div>
+        <p class="pub-progreso-texto" id="ocr-progreso-texto"></p>
+
+        <div class="pub-resultado" id="resultado-ocr">
+          <div class="pub-campo">
+            <label for="ocr-texto-resultado">Texto reconocido</label>
+            <textarea id="ocr-texto-resultado" rows="8" readonly></textarea>
+          </div>
+          <button type="button" class="pub-btn pub-btn-secundario" id="btn-ocr-copiar">Copiar texto</button>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Tu imagen nunca sale de este navegador — el reconocimiento de texto ocurre enteramente en tu computadora, no se sube a ningún servidor.
+        </div>
+        <div class="pub-nota-internet">
+          🌐 Esta herramienta necesita conexión a internet la primera vez que la usas en esta pestaña, para descargar el motor de reconocimiento de texto (no para procesar tu imagen — eso ocurre siempre en tu navegador).
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/cargador-librerias.js"></script>
+  <script src="../js/herramientas/ocr.js"></script>
+</body>
+</html>

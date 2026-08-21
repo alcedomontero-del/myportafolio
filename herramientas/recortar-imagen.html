@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redimensionador y recortador de imágenes gratis — Alcedo Montero</title>
+<meta name="description" content="Cambia el tamaño o recorta una imagen a mano, 100% en tu navegador. Nada se sube a ningún servidor." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>✂️</span> Redimensionador y recortador de imágenes</h1>
+        <p>Cambia el ancho y alto de una imagen, o arrastra sobre ella para recortar la zona que quieras conservar.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <label class="pub-dropzone" id="rec-dropzone" for="rec-archivo">
+          <span class="emoji">📤</span>
+          <p><strong>Haz clic para elegir una imagen</strong> o arrástrala aquí<br />JPEG, PNG o WEBP</p>
+          <input type="file" id="rec-archivo" accept="image/jpeg,image/png,image/webp" />
+        </label>
+
+        <div id="rec-area-trabajo" hidden style="margin-top:20px;">
+          <p style="font-size:0.82rem; color:var(--pub-texto-suave); margin:0 0 10px;">
+            Tamaño original: <span id="rec-tamano-original">—</span>
+          </p>
+
+          <h3 style="font-family:var(--pub-fuente-display); font-size:1.15rem; margin:20px 0 10px;">Redimensionar</h3>
+          <div class="pub-fila-campos">
+            <div class="pub-campo">
+              <label for="rec-ancho">Ancho (px)</label>
+              <input type="number" id="rec-ancho" min="1" />
+            </div>
+            <div class="pub-campo">
+              <label for="rec-alto">Alto (px)</label>
+              <input type="number" id="rec-alto" min="1" />
+            </div>
+          </div>
+          <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem; margin-bottom:14px;">
+            <input type="checkbox" id="rec-proporcion" checked /> Mantener proporción
+          </label>
+          <button type="button" class="pub-btn pub-btn-primario" id="btn-rec-redimensionar">Redimensionar</button>
+
+          <h3 style="font-family:var(--pub-fuente-display); font-size:1.15rem; margin:28px 0 10px;">Recortar</h3>
+          <p style="font-size:0.85rem; color:var(--pub-texto-suave); margin:0 0 12px;">Arrastra sobre la imagen para marcar el área que quieres conservar.</p>
+          <div class="pub-lienzo-recorte" id="rec-lienzo-contenedor">
+            <canvas id="rec-canvas"></canvas>
+            <div class="pub-seleccion-recorte" id="rec-seleccion"></div>
+          </div>
+          <button type="button" class="pub-btn pub-btn-primario" id="btn-rec-recortar" style="margin-top:14px;" disabled>Recortar selección</button>
+        </div>
+
+        <div class="pub-resultado" id="resultado-rec" style="margin-top:24px;">
+          <div class="pub-campo">
+            <label>Resultado</label>
+            <img id="rec-img-resultado" alt="Imagen resultante" style="max-width:100%; border-radius:10px; border:1px solid var(--pub-borde);" />
+            <p style="font-size:0.82rem; color:var(--pub-texto-suave); margin:6px 0 0;" id="rec-tamano-resultado"></p>
+          </div>
+          <a class="pub-btn pub-btn-secundario" id="btn-rec-descargar" style="margin-top:10px; display:inline-block;" download="imagen-editada.png">Descargar imagen</a>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Tu imagen nunca sale de este navegador — todo el procesamiento ocurre en tu computadora, no se sube a ningún servidor.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/recortar-imagen.js"></script>
+</body>
+</html>

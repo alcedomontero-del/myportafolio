@@ -1,0 +1,620 @@
+/**
+ * publico.css — identidad visual de la CARA PÚBLICA del portafolio
+ * (index.html y las páginas de herramientas/descargables públicas).
+ *
+ * Dirección: profesional, oscuro elegante, creíble ante un cliente
+ * de Fiverr/Workana que no te conoce todavía. Sin nada juguetón —
+ * esta es la carta de presentación.
+ *
+ * Token system:
+ *   Color   — carbón azulado casi negro + un solo acento bronce.
+ *              Evita a propósito el terracota/verde-ácido genérico.
+ *   Tipo    — 'Fraunces' (serif expresiva, con carácter) para
+ *              títulos, 'Inter' para texto, 'JetBrains Mono' para
+ *              etiquetas cortas (categoría, estado) — guiño técnico
+ *              sin caer en "tema de programador" completo.
+ *   Firma   — el "punto de estado" (verde/ámbar) y las etiquetas
+ *              mono de categoría son el hilo visual que se repite.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --pub-bg: #0a0d13;
+  --pub-bg-elevada: #12161f;
+  --pub-bg-tarjeta: #151a24;
+  --pub-borde: #232a38;
+  --pub-texto: #e8eaf0;
+  --pub-texto-suave: #939bb0;
+  --pub-acento: #c9a24d;
+  --pub-acento-suave: #3a3122;
+  --pub-verde: #4caf7d;
+  --pub-ambar: #d1a23a;
+  --pub-fuente-display: 'Fraunces', Georgia, serif;
+  --pub-fuente-texto: 'Inter', -apple-system, sans-serif;
+  --pub-fuente-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --pub-radio: 14px;
+  --pub-sombra: 0 12px 32px rgba(0, 0, 0, 0.35);
+  /* Identidad "mármol negro + veta dorada" — degradado de acento y
+     brillo usados en botones, bordes activos y el halo del hero. */
+  --pub-oro-claro: #f3d488;
+  --pub-oro-medio: #c9a24d;
+  --pub-oro-oscuro: #8a6a2c;
+  --pub-oro-degradado: linear-gradient(120deg, var(--pub-oro-claro), var(--pub-oro-medio) 55%, var(--pub-oro-oscuro));
+  --pub-halo-oro: 0 0 0 1px rgba(201, 162, 77, 0.4), 0 10px 30px rgba(201, 162, 77, 0.16);
+}
+
+body.publico {
+  background-color: var(--pub-bg);
+  color: var(--pub-texto);
+  font-family: var(--pub-fuente-texto);
+  line-height: 1.55;
+  /* Textura hexagonal muy sutil de fondo en TODA la página (se
+     desplaza con el contenido, no fija) para que el negro nunca se
+     sienta como un vacío plano entre secciones. */
+  background-image: url('../assets/patron-hexagonal.svg');
+  background-size: 180px 156px;
+  background-repeat: repeat;
+}
+
+.pub-contenedor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Encabezado ---------- */
+.pub-header {
+  position: sticky; top: 0; z-index: 50;
+  background:
+    linear-gradient(rgba(10, 13, 19, 0.9), rgba(10, 13, 19, 0.9)),
+    url('../assets/patron-hexagonal.svg');
+  background-size: auto, 120px 104px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--pub-borde);
+  box-shadow: 0 1px 0 rgba(201, 162, 77, 0.12);
+}
+.pub-header-fila {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; gap: 16px;
+}
+.pub-logo {
+  font-family: var(--pub-fuente-display);
+  font-size: 1.3rem; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--pub-texto); text-decoration: none;
+  position: relative; padding-left: 14px;
+}
+.pub-logo::before {
+  content: ''; position: absolute; left: 0; top: 50%;
+  width: 6px; height: 6px; transform: translateY(-50%) rotate(45deg);
+  background: var(--pub-oro-degradado);
+}
+.pub-nav { display: flex; gap: 24px; min-width: 0; }
+.pub-nav a {
+  text-decoration: none; color: var(--pub-texto-suave);
+  font-size: 0.92rem; font-weight: 500; white-space: nowrap;
+  transition: color 0.15s ease;
+}
+.pub-nav a:hover, .pub-nav a:focus-visible { color: var(--pub-acento); }
+
+/* ---------- Punto de estado ---------- */
+.punto-estado {
+  position: relative; width: 10px; height: 10px; border-radius: 50%;
+  flex-shrink: 0; cursor: default;
+}
+.punto-estado.en-linea { background: var(--pub-verde); box-shadow: 0 0 8px var(--pub-verde); }
+.punto-estado.local { background: var(--pub-ambar); box-shadow: 0 0 8px var(--pub-ambar); }
+.punto-estado .info-punto {
+  position: absolute; top: 18px; right: 0;
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: 8px; padding: 6px 10px; font-size: 0.72rem;
+  font-family: var(--pub-fuente-mono); color: var(--pub-texto-suave);
+  /* Ancho limitado + permite envolver línea: un tooltip con
+     white-space:nowrap puede desbordar la pantalla en móvil aunque
+     esté invisible (opacity:0 no saca el elemento del layout). */
+  max-width: min(220px, calc(100vw - 32px));
+  white-space: normal; text-align: left; line-height: 1.4;
+  opacity: 0; pointer-events: none;
+  transform: translateY(-4px); transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.punto-estado:hover .info-punto, .punto-estado:focus-visible .info-punto {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ---------- Hero ---------- */
+/* Mármol negro con vetas doradas de fondo (assets/textura-vetas-doradas.svg,
+   textura original, no una foto de stock) + un halo radial suave detrás
+   del título para que el texto siga siendo lo primero que se lee. */
+.pub-hero {
+  position: relative; overflow: hidden;
+  padding: 96px 0 64px;
+  background-color: var(--pub-bg);
+  background-image: url('../assets/textura-vetas-doradas.svg');
+  background-size: cover; background-position: center;
+}
+.pub-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(560px 360px, rgba(201, 162, 77, 0.14), transparent 70%),
+    linear-gradient(180deg, rgba(10, 13, 19, 0.35) 0%, var(--pub-bg) 92%);
+  /* La capa radial se agranda (200% 200%) para que background-position
+     tenga margen de sobra donde desplazarse sin dejar ver el borde del
+     degradado; la vetada (linear-gradient) queda fija en 100% 100%. */
+  background-size: 200% 200%, 100% 100%;
+  background-position: 12% 20%, 0 0;
+  animation: pub-brillo-hero 24s ease-in-out infinite;
+}
+.pub-hero > .pub-contenedor { position: relative; z-index: 1; }
+.pub-hero-eyebrow {
+  font-family: var(--pub-fuente-mono); font-size: 0.78rem;
+  color: var(--pub-acento); letter-spacing: 0.08em; text-transform: uppercase;
+  margin: 0 0 16px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.pub-hero-eyebrow::before {
+  content: ''; width: 22px; height: 1px; background: var(--pub-oro-degradado);
+}
+.pub-hero h1 {
+  font-family: var(--pub-fuente-display); font-weight: 600;
+  font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.15;
+  margin: 0 0 20px; letter-spacing: -0.01em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+.pub-hero p {
+  font-size: 1.08rem; color: var(--pub-texto-suave);
+  max-width: 62ch; margin: 0 0 32px;
+}
+.pub-hero-acciones { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- Botones ---------- */
+.pub-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 10px; font-weight: 600;
+  font-size: 0.92rem; text-decoration: none; border: 1px solid transparent;
+  position: relative; overflow: hidden;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pub-btn:hover { transform: translateY(-1px); }
+
+.pub-btn-primario {
+  background: var(--pub-oro-degradado); color: #14100a;
+  box-shadow: 0 8px 20px rgba(201, 162, 77, 0.22);
+}
+.pub-btn-primario:hover { box-shadow: 0 10px 26px rgba(201, 162, 77, 0.34); }
+/* Brillo que cruza el botón al pasar el mouse — refuerzo sutil del
+   "metal pulido", sin animación continua (se dispara solo en :hover). */
+.pub-btn-primario::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.45) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+}
+.pub-btn-primario:hover::after { transform: translateX(120%); }
+
+.pub-btn-secundario {
+  border-color: var(--pub-borde); color: var(--pub-texto);
+  background: rgba(201, 162, 77, 0.04);
+}
+.pub-btn-secundario:hover { border-color: var(--pub-acento); background: var(--pub-acento-suave); }
+
+/* ---------- Secciones ---------- */
+.pub-seccion { padding: 56px 0; position: relative; }
+/* Separador ornamental entre secciones — línea degradada con un
+   rombo dorado al centro, en vez del vacío plano de antes. No se
+   pone en la primera sección después del hero (ver :not) porque el
+   propio hero ya cierra con su degradado. */
+.pub-seccion + .pub-seccion::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(400px, 70%); height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 77, 0.5), transparent);
+}
+.pub-seccion + .pub-seccion::after {
+  content: ''; position: absolute; top: -4.5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 8px; height: 8px; background: var(--pub-oro-degradado);
+}
+/* Franja alterna muy sutil (apenas un tono más clara que el fondo)
+   para que las secciones largas no se fundan en un único bloque
+   negro sin límites visibles. */
+#testimonios {
+  background:
+    radial-gradient(480px 340px, rgba(201, 162, 77, 0.06), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(201, 162, 77, 0.025) 15%, rgba(201, 162, 77, 0.025) 85%, transparent);
+  background-size: 220% 220%, 100% 100%;
+  background-position: 88% 20%, 0 0;
+  animation: pub-brillo-testimonios 26s ease-in-out infinite;
+}
+#proyectos {
+  background: radial-gradient(520px 360px, rgba(201, 162, 77, 0.06), transparent 70%);
+  background-size: 220% 220%;
+  background-position: 6% 30%;
+  animation: pub-brillo-proyectos 20s ease-in-out infinite;
+}
+#contacto {
+  background: radial-gradient(520px 380px, rgba(201, 162, 77, 0.07), transparent 70%);
+  background-size: 220% 220%;
+  background-position: 92% 70%;
+  animation: pub-brillo-contacto 28s ease-in-out infinite;
+}
+
+/* Brillos ambientales: el halo dorado de cada sección se desplaza muy
+   lentamente en loop (sin saltos, ease-in-out en ambas direcciones).
+   Cada uno tiene duración y punto de partida distintos para que no se
+   sientan sincronizados entre sí al bajar la página. */
+@keyframes pub-brillo-hero {
+  0%, 100% { background-position: 12% 20%, 0 0; }
+  50%      { background-position: 22% 30%, 0 0; }
+}
+@keyframes pub-brillo-testimonios {
+  0%, 100% { background-position: 88% 20%, 0 0; }
+  50%      { background-position: 78% 32%, 0 0; }
+}
+@keyframes pub-brillo-proyectos {
+  0%, 100% { background-position: 6% 30%; }
+  50%      { background-position: 16% 42%; }
+}
+@keyframes pub-brillo-contacto {
+  0%, 100% { background-position: 92% 70%; }
+  50%      { background-position: 80% 58%; }
+}
+
+/* Respeto a quienes desactivaron el movimiento en su sistema: los
+   brillos vuelven a quedar estáticos en su posición base. */
+@media (prefers-reduced-motion: reduce) {
+  .pub-hero::before, #testimonios, #proyectos, #contacto {
+    animation: none;
+  }
+}
+.pub-seccion-titulo {
+  font-family: var(--pub-fuente-display); font-weight: 600;
+  font-size: 1.7rem; margin: 0 0 8px;
+  position: relative; padding-left: 18px;
+}
+.pub-seccion-titulo::before {
+  content: ''; position: absolute; left: 0; top: 0.15em; bottom: 0.15em;
+  width: 3px; background: var(--pub-oro-degradado); border-radius: 2px;
+}
+.pub-seccion-sub { color: var(--pub-texto-suave); margin: 0 0 32px; max-width: 60ch; }
+
+/* ---------- Tarjetas de proyecto (mini caso de estudio) ---------- */
+.pub-grid-proyectos {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 22px;
+}
+.pub-tarjeta {
+  background: var(--pub-bg-tarjeta); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); overflow: hidden; min-width: 0;
+  display: flex; flex-direction: column;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.pub-tarjeta:hover { border-color: var(--pub-acento); transform: translateY(-2px); box-shadow: var(--pub-halo-oro); }
+.pub-tarjeta-img {
+  width: 100%; aspect-ratio: 16/10; object-fit: cover;
+  background: var(--pub-bg-elevada);
+}
+/* Placeholder cuando el proyecto todavía no tiene captura subida —
+   antes era un rectángulo plano con un emoji chico, se veía como una
+   imagen rota. Ahora lleva la misma textura de vetas doradas (a muy
+   baja opacidad) para que se lea como un estado de espera con marca
+   propia, no como un error. */
+div.pub-tarjeta-img {
+  background-color: var(--pub-bg-elevada);
+  background-image: url('../assets/textura-vetas-doradas.svg');
+  background-size: cover; background-position: center;
+  position: relative;
+}
+div.pub-tarjeta-img::before {
+  content: ''; position: absolute; inset: 0; background: rgba(10, 13, 19, 0.72);
+}
+.pub-tarjeta-cuerpo { padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pub-etiqueta-categoria {
+  font-family: var(--pub-fuente-mono); font-size: 0.7rem;
+  color: var(--pub-acento); text-transform: uppercase; letter-spacing: 0.06em;
+  display: inline-flex; align-items: center; gap: 6px; width: fit-content;
+}
+.pub-tarjeta h3 {
+  font-family: var(--pub-fuente-display); font-size: 1.15rem;
+  margin: 0; font-weight: 600;
+}
+.pub-caso-estudio { display: flex; flex-direction: column; gap: 6px; font-size: 0.87rem; color: var(--pub-texto-suave); }
+.pub-caso-estudio strong { color: var(--pub-texto); font-family: var(--pub-fuente-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.pub-tarjeta-link {
+  margin-top: auto; font-size: 0.85rem; font-weight: 600;
+  color: var(--pub-acento); text-decoration: none; padding-top: 8px;
+}
+
+/* ---------- Testimonios ---------- */
+.pub-grid-testimonios { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 20px; }
+.pub-testimonio {
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); padding: 26px 22px 22px; min-width: 0;
+  position: relative; overflow: hidden;
+}
+.pub-testimonio::before {
+  content: '“'; position: absolute; top: -18px; right: 14px;
+  font-family: var(--pub-fuente-display); font-size: 5.5rem; font-weight: 600;
+  color: rgba(201, 162, 77, 0.14); line-height: 1; pointer-events: none;
+}
+.pub-testimonio p { position: relative; font-style: italic; color: var(--pub-texto); margin: 0 0 14px; }
+.pub-testimonio-autor { position: relative; font-size: 0.85rem; color: var(--pub-texto-suave); font-family: var(--pub-fuente-mono); }
+
+/* ---------- Herramientas (grid público) ---------- */
+.pub-grid-herramientas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 16px; }
+.pub-tarjeta-herramienta {
+  background: var(--pub-bg-tarjeta); border: 1px solid var(--pub-borde);
+  border-radius: 12px; padding: 20px; text-decoration: none; color: var(--pub-texto);
+  display: flex; flex-direction: column; gap: 8px; min-width: 0;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.pub-tarjeta-herramienta:hover { border-color: var(--pub-acento); transform: translateY(-2px); box-shadow: var(--pub-halo-oro); }
+.pub-tarjeta-herramienta .emoji { font-size: 1.6rem; }
+.pub-tarjeta-herramienta h4 { margin: 0; font-size: 0.98rem; font-weight: 600; }
+
+/* ---------- Descargables (CV destacado + apps propias) ---------- */
+.pub-cv-destacado {
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-acento);
+  border-radius: var(--pub-radio); padding: 26px; margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; min-width: 0;
+}
+.pub-cv-destacado-texto h3 { margin: 0 0 4px; font-family: var(--pub-fuente-display); font-size: 1.2rem; }
+.pub-cv-destacado-texto p { margin: 0; color: var(--pub-texto-suave); font-size: 0.9rem; }
+.pub-grid-descargables { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 18px; }
+.pub-tarjeta-descargable {
+  background: var(--pub-bg-tarjeta); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); padding: 20px; min-width: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.pub-tarjeta-descargable h4 { margin: 0; font-size: 1rem; font-weight: 600; }
+.pub-tarjeta-descargable p { margin: 0; color: var(--pub-texto-suave); font-size: 0.88rem; }
+
+/* ---------- Canales de contacto ---------- */
+.pub-canal-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--pub-acento-suave); border: 1px solid var(--pub-acento);
+  color: var(--pub-acento); padding: 14px 24px; border-radius: 10px;
+  font-weight: 600; text-decoration: none; font-size: 0.95rem;
+}
+.pub-grid-canales { display: flex; flex-wrap: wrap; gap: 14px; }
+.pub-canal-destacado {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+}
+.pub-canal-destacado p { color: var(--pub-texto-suave); margin: 0; max-width: 50ch; }
+
+/* ---------- Pie de página ---------- */
+.pub-footer {
+  position: relative;
+  padding: 32px 0 48px;
+  color: var(--pub-texto-suave); font-size: 0.85rem;
+  background: url('../assets/patron-hexagonal.svg');
+  background-size: 120px 104px; background-repeat: repeat;
+  background-position: center;
+}
+.pub-footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 77, 0.5) 50%, transparent);
+}
+.pub-footer-fila {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.pub-footer-paypal { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--pub-texto-suave); font-size: 0.82rem; }
+.pub-footer-paypal:hover { color: var(--pub-acento); }
+
+/* ---------- Estados vacíos / de carga ---------- */
+.pub-estado-vacio, .pub-estado-carga {
+  border: 1px dashed var(--pub-borde); border-radius: var(--pub-radio);
+  padding: 40px 24px; text-align: center; color: var(--pub-texto-suave);
+}
+.pub-estado-vacio .emoji, .pub-estado-carga .emoji { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+
+/* ---------- Aviso de cookies ---------- */
+.pub-cookies {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 200;
+  max-width: 560px; margin: 0 auto;
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: 12px; padding: 16px 18px; box-shadow: var(--pub-sombra);
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.pub-cookies p { margin: 0; font-size: 0.82rem; color: var(--pub-texto-suave); flex: 1; min-width: 200px; }
+
+/* ---------- Páginas individuales de cada herramienta ---------- */
+.pub-herramienta-header { padding: 32px 0 8px; }
+.pub-herramienta-volver {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  color: var(--pub-texto-suave); font-size: 0.85rem; margin-bottom: 18px;
+}
+.pub-herramienta-volver:hover { color: var(--pub-acento); }
+.pub-herramienta-header h1 {
+  font-family: var(--pub-fuente-display); font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0 0 10px; display: flex; align-items: center; gap: 12px;
+}
+.pub-herramienta-header p { color: var(--pub-texto-suave); max-width: 62ch; margin: 0; }
+
+.pub-herramienta-panel {
+  background: var(--pub-bg-tarjeta); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); padding: 28px; margin: 28px 0; min-width: 0;
+}
+
+.pub-campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; min-width: 0; }
+.pub-campo label { font-size: 0.82rem; color: var(--pub-texto-suave); font-weight: 500; }
+.pub-campo input,
+.pub-campo textarea,
+.pub-campo select {
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde); border-radius: 10px;
+  padding: 11px 14px; color: var(--pub-texto); font-family: var(--pub-fuente-texto);
+  font-size: 0.95rem; width: 100%;
+}
+.pub-campo input:focus, .pub-campo textarea:focus, .pub-campo select:focus {
+  outline: 2px solid var(--pub-acento); outline-offset: 1px; border-color: var(--pub-acento);
+}
+.pub-campo textarea { resize: vertical; min-height: 90px; }
+.pub-fila-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 14px; }
+.pub-fila-campos > * { min-width: 0; }
+
+.pub-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+button.pub-btn { border: none; }
+
+.pub-resultado {
+  margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--pub-borde);
+  display: none;
+}
+.pub-resultado.mostrar { display: block; }
+
+.pub-nota-privacidad {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 20px;
+  font-size: 0.8rem; color: var(--pub-texto-suave); background: var(--pub-bg-elevada);
+  border-radius: 10px; padding: 12px 14px; border: 1px solid var(--pub-borde);
+}
+
+/* Zona de arrastrar-y-soltar (compresor, recortador, imágenes↔PDF, OCR).
+   Es un <label> — inline por defecto: con borde + contenido que envuelve
+   en varias líneas (emoji + texto con <br>), el navegador fragmenta el
+   borde por cada línea en vez de dibujar un solo marco, y el salto de
+   línea entre <strong> y el texto siguiente colapsa. display:flex en
+   columna lo convierte en un bloque único con marco completo. */
+.pub-dropzone {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 2px dashed var(--pub-borde); border-radius: var(--pub-radio);
+  padding: 32px 20px; text-align: center; cursor: pointer; background: var(--pub-bg-elevada);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pub-dropzone:hover, .pub-dropzone.sobre-arrastre { border-color: var(--pub-acento); background: var(--pub-acento-suave); }
+.pub-dropzone .emoji { font-size: 1.8rem; display: block; margin-bottom: 8px; }
+.pub-dropzone p { margin: 0; color: var(--pub-texto-suave); font-size: 0.88rem; }
+.pub-dropzone input[type="file"] { display: none; }
+
+/* Comparación antes/después (compresor de imágenes) */
+.pub-comparacion { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; }
+.pub-comparacion figure { margin: 0; background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde); border-radius: 12px; overflow: hidden; }
+.pub-comparacion img { display: block; width: 100%; max-height: 240px; object-fit: contain; background: #000; }
+.pub-comparacion figcaption { padding: 10px 12px; font-size: 0.82rem; color: var(--pub-texto-suave); font-family: var(--pub-fuente-mono); }
+
+/* Lienzo interactivo de recorte */
+.pub-lienzo-recorte { position: relative; display: inline-block; max-width: 100%; touch-action: none; }
+.pub-lienzo-recorte canvas { display: block; max-width: 100%; height: auto; border-radius: 10px; }
+.pub-seleccion-recorte {
+  position: absolute; border: 2px solid var(--pub-acento);
+  background: rgba(201, 162, 77, 0.18); pointer-events: none; display: none;
+}
+.pub-seleccion-recorte.activa { display: block; }
+
+
+/* Cuadrícula de resultados tipo swatch (paleta de colores) */
+.pub-grid-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr)); gap: 14px; }
+.pub-swatch {
+  border-radius: 12px; overflow: hidden; border: 1px solid var(--pub-borde); cursor: pointer;
+  background: none; padding: 0; text-align: left; font-family: var(--pub-fuente-mono); color: var(--pub-texto);
+}
+.pub-swatch .muestra { height: 70px; width: 100%; }
+.pub-swatch .codigo { padding: 8px 10px; font-size: 0.75rem; }
+
+/* Aviso de que la herramienta necesita internet (carga una librería
+   externa) — distinto del aviso de privacidad: el archivo del
+   visitante nunca sale del navegador, solo se descarga código. */
+.pub-nota-internet {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 16px;
+  font-size: 0.8rem; color: var(--pub-ambar); background: rgba(209, 162, 58, 0.1);
+  border-radius: 10px; padding: 12px 14px; border: 1px solid rgba(209, 162, 58, 0.35);
+}
+
+/* Lista reordenable de miniaturas (imágenes→PDF) */
+.pub-lista-miniaturas { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.pub-miniatura-item {
+  display: flex; align-items: center; gap: 12px; min-width: 0;
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: 10px; padding: 8px 10px;
+}
+.pub-miniatura-item img { width: 52px; height: 52px; object-fit: cover; border-radius: 6px; flex: none; }
+.pub-miniatura-item .pub-miniatura-nombre {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 0.82rem; color: var(--pub-texto-suave);
+}
+.pub-miniatura-item .pub-miniatura-acciones { display: flex; gap: 4px; flex: none; }
+.pub-miniatura-item button {
+  background: none; border: 1px solid var(--pub-borde); color: var(--pub-texto);
+  border-radius: 6px; width: 28px; height: 28px; cursor: pointer; font-size: 0.85rem;
+}
+.pub-miniatura-item button:hover { border-color: var(--pub-acento); color: var(--pub-acento); }
+.pub-miniatura-item button:disabled { opacity: 0.35; cursor: default; }
+
+/* Barra de progreso (OCR) */
+.pub-progreso { height: 8px; border-radius: 4px; background: var(--pub-bg-elevada); overflow: hidden; margin: 14px 0; display: none; }
+.pub-progreso.mostrar { display: block; }
+.pub-progreso-relleno { height: 100%; width: 0%; background: var(--pub-acento); transition: width 0.2s ease; }
+.pub-progreso-texto { font-size: 0.78rem; color: var(--pub-texto-suave); margin: -8px 0 14px; display: none; }
+.pub-progreso-texto.mostrar { display: block; }
+
+/* ---------- Secciones repetibles (creador de CV) ---------- */
+.pub-campo-seccion { margin-bottom: 22px; }
+.pub-campo-seccion-titulo {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.pub-campo-seccion-titulo h3 {
+  margin: 0; font-family: var(--pub-fuente-display); font-size: 1.05rem; font-weight: 600;
+}
+.pub-btn-chico { padding: 8px 14px; font-size: 0.82rem; }
+.pub-entrada-repetible {
+  border: 1px solid var(--pub-borde); border-radius: 10px;
+  padding: 14px; margin-bottom: 12px; background: var(--pub-bg-elevada);
+  position: relative;
+}
+.pub-entrada-repetible .pub-campo { margin-bottom: 12px; }
+.pub-entrada-repetible .pub-campo:last-child { margin-bottom: 0; }
+.pub-entrada-repetible-quitar {
+  position: absolute; top: 10px; right: 10px; border: 1px solid var(--pub-borde);
+  background: transparent; color: var(--pub-texto-suave); border-radius: 6px;
+  width: 26px; height: 26px; cursor: pointer; font-size: 0.85rem; line-height: 1;
+}
+.pub-entrada-repetible-quitar:hover { border-color: var(--pub-acento); color: var(--pub-acento); }
+.pub-entrada-vacia { color: var(--pub-texto-suave); font-size: 0.85rem; margin: 0 0 12px; }
+
+/* Cuadrícula de páginas resultantes (PDF→imágenes) */
+.pub-grid-paginas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr)); gap: 14px; margin-top: 16px; }
+.pub-pagina-item {
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde); border-radius: 12px;
+  overflow: hidden; text-align: center;
+}
+.pub-pagina-item img { display: block; width: 100%; max-height: 200px; object-fit: contain; background: #000; }
+.pub-pagina-item .pub-pagina-pie { padding: 8px 10px; font-size: 0.78rem; color: var(--pub-texto-suave); }
+.pub-pagina-item a { display: block; padding: 8px; font-size: 0.8rem; }
+
+@media (max-width: 640px) {
+  .pub-header-fila { flex-wrap: wrap; }
+  .pub-nav { gap: 16px; overflow-x: auto; }
+  .pub-hero { padding: 56px 0 40px; }
+}
+
+/* ---------- Aviso de cookies ---------- */
+.pub-aviso-cookies {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 200;
+  max-width: 560px; margin: 0 auto;
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); box-shadow: var(--pub-sombra);
+  padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 14px;
+  align-items: center; justify-content: space-between;
+}
+.pub-aviso-cookies p {
+  margin: 0; font-size: 0.86rem; color: var(--pub-texto-suave);
+  min-width: 0; flex: 1 1 240px;
+}
+.pub-aviso-cookies-botones {
+  display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .pub-aviso-cookies { left: 10px; right: 10px; bottom: 10px; padding: 16px; }
+  .pub-aviso-cookies-botones { width: 100%; }
+  .pub-aviso-cookies-botones .pub-btn { flex: 1; justify-content: center; }
+}
+
+/* ---------- Toast y badge de modo (estructura en base.css) ---------- */
+.publico .toast {
+  background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  color: var(--pub-texto); font-family: var(--pub-fuente-texto);
+}
+.publico .toast.error { border-color: var(--pub-ambar); color: var(--pub-ambar); }
+.publico .mode-badge { color: var(--pub-texto-suave); font-family: var(--pub-fuente-mono); }
+.publico .mode-badge.local .dot { background: var(--pub-ambar); box-shadow: 0 0 6px var(--pub-ambar); }
+.publico .mode-badge.live .dot { background: var(--pub-verde); box-shadow: 0 0 6px var(--pub-verde); }

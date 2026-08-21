@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Generador de paleta de colores gratis — Alcedo Montero</title>
+<meta name="description" content="Genera paletas de colores armoniosas a partir de un color base, o completamente al azar. Copia los códigos hexadecimales con un clic." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🎨</span> Paleta de colores</h1>
+        <p>Genera una paleta armoniosa a partir de un color, o prueba una combinación al azar. Haz clic en cualquier color para copiar su código.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <form id="form-paleta">
+          <div class="pub-fila-campos">
+            <div class="pub-campo">
+              <label for="paleta-color-base">Color base</label>
+              <input type="color" id="paleta-color-base" value="#c9a24d" style="height:44px; padding:4px;" />
+            </div>
+            <div class="pub-campo">
+              <label for="paleta-modo">Tipo de paleta</label>
+              <select id="paleta-modo">
+                <option value="analoga">Análoga</option>
+                <option value="complementaria">Complementaria</option>
+                <option value="triada">Tríada</option>
+                <option value="monocromatica">Monocromática</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="pub-btn pub-btn-primario">Generar paleta</button>
+            <button type="button" class="pub-btn pub-btn-secundario" id="btn-paleta-azar">Sorpréndeme (al azar)</button>
+          </div>
+        </form>
+
+        <div class="pub-resultado mostrar" id="resultado-paleta" style="margin-top:24px;">
+          <div class="pub-grid-swatches" id="grid-paleta"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/paleta-colores.js"></script>
+</body>
+</html>

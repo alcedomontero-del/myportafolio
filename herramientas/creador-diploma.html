@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creador de diplomas y certificados en PDF gratis — Alcedo Montero</title>
+<meta name="description" content="Genera un diploma o certificado en PDF listo para imprimir, 100% en tu navegador. Sin registrarte, sin subir nada a ningún servidor." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🏅</span> Creador de diplomas y certificados</h1>
+        <p>Llena los datos y descarga un diploma en PDF, orientación horizontal, listo para imprimir.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+
+        <div class="pub-campo">
+          <label for="dip-destinatario">Nombre del destinatario *</label>
+          <input type="text" id="dip-destinatario" placeholder="Ej. María Fernández" />
+        </div>
+        <div class="pub-campo">
+          <label for="dip-motivo">Motivo (curso, logro o reconocimiento)</label>
+          <input type="text" id="dip-motivo" placeholder="Ej. Completar el curso de Diseño Web Básico" />
+        </div>
+        <div class="pub-fila-campos">
+          <div class="pub-campo">
+            <label for="dip-emisor">Otorgado por</label>
+            <input type="text" id="dip-emisor" placeholder="Ej. Academia Digital RD" />
+          </div>
+          <div class="pub-campo">
+            <label for="dip-fecha">Fecha</label>
+            <input type="date" id="dip-fecha" />
+          </div>
+        </div>
+        <div class="pub-campo">
+          <label for="dip-firma">Texto de la firma (opcional)</label>
+          <input type="text" id="dip-firma" placeholder="Ej. Director académico" />
+        </div>
+        <div class="pub-campo">
+          <label for="dip-estilo">Estilo</label>
+          <select id="dip-estilo">
+            <option value="dorado">Clásico dorado</option>
+            <option value="azul">Elegante azul</option>
+            <option value="minimalista">Minimalista</option>
+          </select>
+        </div>
+
+        <button type="button" class="pub-btn pub-btn-primario" id="btn-dip-generar">Generar PDF</button>
+        <p class="pub-progreso-texto" id="dip-error" style="display:none; color:#e07a5f;"></p>
+
+        <div class="pub-progreso" id="dip-progreso"><div class="pub-progreso-relleno" id="dip-progreso-relleno"></div></div>
+        <p class="pub-progreso-texto" id="dip-progreso-texto"></p>
+
+        <div class="pub-resultado" id="resultado-dip">
+          <div class="pub-campo">
+            <label>Resultado</label>
+            <p id="dip-info-resultado" style="font-size:0.85rem; color:var(--pub-texto-suave); margin:0;"></p>
+          </div>
+          <a class="pub-btn pub-btn-secundario" id="btn-dip-descargar" style="margin-top:10px; display:inline-block;" download="diploma.pdf">Descargar PDF</a>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Tus datos nunca salen de este navegador — el PDF se arma enteramente en tu computadora, no se sube a ningún servidor.
+        </div>
+        <div class="pub-nota-internet">
+          🌐 Esta herramienta necesita conexión a internet la primera vez que la usas en esta pestaña, para descargar el motor que arma el PDF (no para procesar tus datos — eso ocurre siempre en tu navegador).
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/cargador-librerias.js"></script>
+  <script src="../js/herramientas/creador-diploma.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+/**
+ * admin-lcars.css — identidad visual del LOGIN + PANEL ADMIN
+ * (login.html y admin.html). Nadie más que tú ve esto.
+ *
+ * Dirección: LCARS (interfaz de naves de Star Trek: TNG) —
+ * "visión antigua del futuro". Paneles curvos de colores sólidos
+ * sobre fondo negro, tipografía gruesa en mayúsculas, botones
+ * píldora, divisores en forma de "L".
+ *
+ * Los campos de formulario (donde se escribe texto real) se
+ * mantienen limpios y legibles por dentro — el marco es LCARS,
+ * el contenido no sacrifica comodidad de uso diario.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --lcars-negro: #000000;
+  --lcars-panel: #08080a;
+  --lcars-naranja: #ff9c00;
+  --lcars-purpura: #cc99cc;
+  --lcars-azul: #9999ff;
+  --lcars-rosa: #cc6699;
+  --lcars-rojo: #cc6666;
+  --lcars-verde: #55aa77;
+  --lcars-ambar: #d1a23a;
+  --lcars-texto: #f2f2f2;
+  --lcars-texto-suave: #9a9aa5;
+  --lcars-fuente-display: 'Antonio', 'Arial Narrow', sans-serif;
+  --lcars-fuente-texto: 'Inter', -apple-system, sans-serif;
+}
+
+body.lcars {
+  background: var(--lcars-negro);
+  color: var(--lcars-texto);
+  font-family: var(--lcars-fuente-texto);
+}
+
+.lcars-mayus {
+  font-family: var(--lcars-fuente-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+/* ---------- Estructura general: barra lateral curva + contenido ---------- */
+.lcars-app { display: flex; min-height: 100vh; }
+.lcars-app[hidden] { display: none; }
+.lcars-sidebar {
+  width: 220px; flex-shrink: 0; background: var(--lcars-panel);
+  display: flex; flex-direction: column; padding: 20px 0;
+  border-right: 6px solid var(--lcars-naranja);
+}
+.lcars-sidebar-cierre-superior {
+  height: 40px; background: var(--lcars-naranja);
+  border-radius: 0 0 32px 0; margin-bottom: 18px;
+}
+.lcars-marca {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  font-size: 1.15rem; color: var(--lcars-naranja); padding: 0 18px 18px;
+  letter-spacing: 0.02em;
+}
+.lcars-nav { display: flex; flex-direction: column; gap: 8px; padding: 0 18px; min-width: 0; }
+.lcars-nav-btn {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  font-size: 0.95rem; letter-spacing: 0.02em; text-align: left;
+  border: none; border-radius: 0 20px 20px 0; padding: 12px 18px;
+  background: #1a1a1d; color: var(--lcars-texto-suave);
+  cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+}
+.lcars-nav-btn:hover { background: #26262a; color: var(--lcars-texto); }
+.lcars-nav-btn.activo { background: var(--lcars-naranja); color: #14100a; }
+.lcars-nav-btn.color-purpura.activo { background: var(--lcars-purpura); }
+.lcars-nav-btn.color-azul.activo { background: var(--lcars-azul); }
+.lcars-nav-btn.color-rosa.activo { background: var(--lcars-rosa); }
+.lcars-nav-btn.color-verde.activo { background: var(--lcars-verde); }
+
+.lcars-sidebar-pie { margin-top: auto; padding: 0 18px; }
+.lcars-cerrar-sesion {
+  width: 100%; font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  background: var(--lcars-rojo); color: #140505; border: none;
+  border-radius: 20px; padding: 10px 16px; font-size: 0.85rem; cursor: pointer;
+}
+
+.lcars-contenido { flex: 1; padding: 28px 32px 60px; min-width: 0; overflow-x: hidden; }
+.lcars-top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.lcars-top-bar h1 {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  color: var(--lcars-naranja); font-size: 1.6rem; margin: 0; letter-spacing: 0.02em;
+}
+
+/* ---------- Divisor en "L" — separador de secciones ---------- */
+.lcars-divisor {
+  display: flex; align-items: center; gap: 0; margin: 24px 0 18px;
+}
+.lcars-divisor-codo {
+  width: 44px; height: 22px; background: var(--lcars-purpura);
+  border-radius: 0 0 0 22px; flex-shrink: 0;
+}
+.lcars-divisor-barra { flex: 1; height: 8px; background: var(--lcars-purpura); min-width: 0; }
+.lcars-divisor-numero {
+  font-family: var(--lcars-fuente-display); font-size: 0.85rem;
+  color: var(--lcars-texto-suave); padding-left: 12px; white-space: nowrap;
+}
+
+/* ---------- Panel / tarjeta ---------- */
+.lcars-panel {
+  background: var(--lcars-panel); border-radius: 18px;
+  padding: 22px; margin-bottom: 18px; border-left: 6px solid var(--lcars-azul);
+  min-width: 0;
+}
+.lcars-panel h2, .lcars-panel h3 {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  color: var(--lcars-texto); letter-spacing: 0.02em; margin-top: 0;
+}
+
+/* ---------- Botones píldora ---------- */
+.lcars-btn {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  letter-spacing: 0.02em; border: none; border-radius: 999px;
+  padding: 11px 26px; font-size: 0.9rem; cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.lcars-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.lcars-btn-naranja { background: var(--lcars-naranja); color: #14100a; }
+.lcars-btn-purpura { background: var(--lcars-purpura); color: #14100a; }
+.lcars-btn-azul { background: var(--lcars-azul); color: #0a0a1a; }
+.lcars-btn-rosa { background: var(--lcars-rosa); color: #140a10; }
+.lcars-btn-rojo { background: var(--lcars-rojo); color: #140505; }
+.lcars-btn-fantasma {
+  background: transparent; border: 2px solid var(--lcars-texto-suave);
+  color: var(--lcars-texto-suave);
+}
+
+/* ---------- Formularios: limpios y legibles por dentro ---------- */
+.lcars-campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; min-width: 0; }
+.lcars-campo label {
+  font-size: 0.78rem; color: var(--lcars-texto-suave);
+  font-family: var(--lcars-fuente-texto); font-weight: 500;
+}
+.lcars-campo input,
+.lcars-campo textarea,
+.lcars-campo select {
+  background: #17171a; border: 1px solid #2c2c31; border-radius: 10px;
+  padding: 11px 14px; color: var(--lcars-texto); font-family: var(--lcars-fuente-texto);
+  font-size: 0.94rem; width: 100%;
+}
+.lcars-campo input:focus, .lcars-campo textarea:focus, .lcars-campo select:focus {
+  outline: 2px solid var(--lcars-naranja); outline-offset: 1px; border-color: var(--lcars-naranja);
+}
+.lcars-campo textarea { resize: vertical; min-height: 80px; }
+.lcars-fila-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px; }
+.lcars-fila-campos > * { min-width: 0; }
+
+/* Checkbox destacado — se mantiene simple y legible, no LCARS */
+.lcars-campo-check {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.lcars-campo-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--lcars-naranja); }
+.lcars-campo-check label { font-size: 0.85rem; color: var(--lcars-texto); }
+
+/* ---------- Interruptor (activar/desactivar herramientas) ---------- */
+.lcars-switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
+.lcars-switch input { opacity: 0; width: 0; height: 0; }
+.lcars-switch .riel {
+  position: absolute; inset: 0; background: #2c2c31; border-radius: 999px;
+  cursor: pointer; transition: background 0.15s ease;
+}
+.lcars-switch .riel::before {
+  content: ""; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px;
+  background: #f2f2f2; border-radius: 50%; transition: transform 0.15s ease;
+}
+.lcars-switch input:checked + .riel { background: var(--lcars-verde); }
+.lcars-switch input:checked + .riel::before { transform: translateX(20px); }
+.lcars-switch input:focus-visible + .riel { outline: 2px solid var(--lcars-naranja); outline-offset: 2px; }
+
+/* ---------- Reordenar (flechas arriba/abajo) ---------- */
+.lcars-btn-orden {
+  background: #1a1a1d; border: 1px solid #2c2c31; color: var(--lcars-texto-suave);
+  border-radius: 8px; width: 30px; height: 26px; font-size: 0.85rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.lcars-btn-orden:hover:not(:disabled) { color: var(--lcars-texto); border-color: var(--lcars-naranja); }
+.lcars-btn-orden:disabled { opacity: 0.3; cursor: default; }
+.lcars-item.inactiva { opacity: 0.55; }
+
+/* Vista previa de imagen al subir un archivo */
+.lcars-preview-imagen {
+  width: 100%; max-width: 240px; aspect-ratio: 16/10; object-fit: cover;
+  border-radius: 10px; border: 1px solid #2c2c31; margin-top: 8px; display: none;
+}
+.lcars-preview-imagen.mostrar { display: block; }
+
+/* Nombre del archivo elegido cuando no hay vista previa visual posible (PDF/ZIP) */
+.lcars-nombre-archivo {
+  display: block; margin-top: 6px; font-size: 0.85rem; color: var(--lcars-texto-suave, #9a9aa5);
+}
+
+/* ---------- Subpestañas dentro de un área (ej. Portafolio) ---------- */
+.lcars-subnav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+.lcars-subnav .lcars-nav-btn { border-radius: 20px; }
+.sub-portafolio[hidden] { display: none; }
+
+/* ---------- Estado vacío (admin) ---------- */
+.lcars-estado-vacio {
+  border: 1px dashed #2c2c31; border-radius: 14px; padding: 30px 20px;
+  text-align: center; color: var(--lcars-texto-suave); font-size: 0.88rem;
+}
+.lcars-estado-vacio .emoji { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+
+/* ---------- Tabla / lista de administración ---------- */
+.lcars-lista { display: flex; flex-direction: column; gap: 10px; }
+.lcars-item {
+  display: flex; align-items: center; gap: 14px; background: #101012;
+  border-radius: 12px; padding: 14px 16px; min-width: 0;
+}
+.lcars-item-cuerpo { flex: 1; min-width: 0; }
+.lcars-item-titulo { font-weight: 600; font-size: 0.95rem; }
+.lcars-item-meta { font-size: 0.78rem; color: var(--lcars-texto-suave); }
+.lcars-item-acciones { display: flex; gap: 8px; flex-shrink: 0; }
+.lcars-item-acciones button {
+  border: none; border-radius: 999px; padding: 7px 14px; font-size: 0.78rem;
+  font-family: var(--lcars-fuente-display); text-transform: uppercase; cursor: pointer;
+}
+
+/* ---------- Tarjetas de diagnóstico (Centro de Control) ---------- */
+.lcars-grid-diagnostico { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 16px; }
+.lcars-tarjeta-diag {
+  border-radius: 14px; padding: 18px; cursor: pointer; border: none; text-align: left;
+  background: #101012; border-left: 8px solid var(--lcars-texto-suave); min-width: 0;
+  color: var(--lcars-texto); font-family: var(--lcars-fuente-texto);
+}
+.lcars-tarjeta-diag.verde { border-left-color: var(--lcars-verde); }
+.lcars-tarjeta-diag.ambar { border-left-color: var(--lcars-ambar); }
+.lcars-tarjeta-diag.rojo { border-left-color: var(--lcars-rojo); }
+.lcars-tarjeta-diag .titulo {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  font-size: 1rem; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.lcars-tarjeta-diag .estado-punto { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.lcars-tarjeta-diag.verde .estado-punto { background: var(--lcars-verde); }
+.lcars-tarjeta-diag.ambar .estado-punto { background: var(--lcars-ambar); }
+.lcars-tarjeta-diag.rojo .estado-punto { background: var(--lcars-rojo); }
+.lcars-tarjeta-diag .detalle {
+  font-size: 0.82rem; color: var(--lcars-texto-suave); margin: 0;
+}
+.lcars-tarjeta-diag .paso-resolver {
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid #2c2c31;
+  font-size: 0.8rem; color: var(--lcars-texto); display: none;
+}
+.lcars-tarjeta-diag[aria-expanded="true"] .paso-resolver { display: block; }
+
+/* ---------- Login ---------- */
+.lcars-login-envoltorio {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.lcars-login-caja { width: 100%; max-width: 400px; }
+.lcars-login-cierre {
+  height: 34px; background: var(--lcars-naranja); border-radius: 20px 20px 0 0;
+  display: flex; align-items: center; padding: 0 20px;
+}
+.lcars-login-cierre span {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  color: #14100a; font-size: 0.8rem; letter-spacing: 0.05em;
+}
+.lcars-login-panel {
+  background: var(--lcars-panel); border-radius: 0 0 20px 20px;
+  padding: 32px 26px; border-left: 6px solid var(--lcars-purpura);
+  border-right: 6px solid var(--lcars-azul);
+}
+.lcars-login-titulo {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  color: var(--lcars-texto); font-size: 1.3rem; margin: 0 0 22px; text-align: center;
+}
+.lcars-login-error {
+  background: rgba(204, 102, 102, 0.15); border: 1px solid var(--lcars-rojo);
+  color: #ffb3b3; border-radius: 10px; padding: 10px 14px; font-size: 0.84rem;
+  margin-bottom: 16px; display: none;
+}
+.lcars-login-error.mostrar { display: block; }
+
+/* ---------- Animación "encendiendo sistemas" ---------- */
+.lcars-arranque {
+  position: fixed; inset: 0; background: #000; z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 18px;
+}
+/* [hidden] pierde contra un .display:flex de la misma especificidad —
+   hay que reforzarlo explícitamente para que el atributo funcione. */
+.lcars-arranque[hidden] { display: none; }
+.lcars-arranque-barra {
+  width: min(70vw, 360px); height: 10px; border-radius: 999px;
+  background: #1a1a1d; overflow: hidden;
+}
+.lcars-arranque-barra span {
+  display: block; height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--lcars-naranja), var(--lcars-rosa));
+  animation: lcars-cargar 1.1s ease forwards;
+}
+@keyframes lcars-cargar { to { width: 100%; } }
+.lcars-arranque-texto {
+  font-family: var(--lcars-fuente-display); text-transform: uppercase;
+  color: var(--lcars-naranja); letter-spacing: 0.08em; font-size: 0.85rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lcars-arranque-barra span { animation: none; width: 100%; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 780px) {
+  .lcars-app { flex-direction: column; }
+  .lcars-sidebar {
+    width: 100%; border-right: none; border-bottom: 6px solid var(--lcars-naranja);
+    flex-direction: row; align-items: center; padding: 12px 14px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .lcars-sidebar-cierre-superior { display: none; }
+  .lcars-marca { padding: 0 14px 0 0; font-size: 1rem; white-space: nowrap; flex-shrink: 0; }
+  /* La barra entera (marca + nav + cerrar sesión) es UN solo scroll
+     horizontal — por eso nav y pie NUNCA llevan su propio overflow
+     ni un margin-left:auto que los "pegue" al borde del viewport en
+     vez de al final real del contenido. */
+  .lcars-nav { flex-direction: row; padding: 0; flex-shrink: 0; }
+  .lcars-nav-btn { white-space: nowrap; border-radius: 20px; flex-shrink: 0; }
+  .lcars-sidebar-pie { margin-top: 0; margin-left: 10px; padding: 0; flex-shrink: 0; }
+  .lcars-cerrar-sesion { white-space: nowrap; padding: 10px 14px; }
+  .lcars-contenido { padding: 20px 16px 40px; }
+}
+
+/* ---------- Toast y badge de modo (estructura en base.css) ---------- */
+.lcars .toast {
+  background: #17171a; border: 1px solid var(--lcars-naranja);
+  color: var(--lcars-texto); font-family: var(--lcars-fuente-texto);
+}
+.lcars .toast.error { border-color: var(--lcars-rojo); color: #ffb3b3; }
+.lcars .mode-badge { color: var(--lcars-texto-suave); font-family: var(--lcars-fuente-texto); font-size: 0.78rem; }
+.lcars .mode-badge.local .dot { background: var(--lcars-ambar); box-shadow: 0 0 6px var(--lcars-ambar); }
+.lcars .mode-badge.live .dot { background: var(--lcars-verde); box-shadow: 0 0 6px var(--lcars-verde); }

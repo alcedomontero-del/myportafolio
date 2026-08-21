@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Generador de código QR gratis — Alcedo Montero</title>
+<meta name="description" content="Genera un código QR a partir de un link o texto, 100% en tu navegador. Descárgalo como imagen PNG, gratis y sin registro." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🔳</span> Generador de código QR</h1>
+        <p>Escribe un link o cualquier texto y descarga tu código QR como imagen. Todo se genera en tu propio navegador — nada se envía a ningún servidor.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <form id="form-qr">
+          <div class="pub-campo">
+            <label for="qr-texto">Texto o link a codificar</label>
+            <textarea id="qr-texto" placeholder="https://ejemplo.com o cualquier texto" required></textarea>
+          </div>
+          <div class="pub-fila-campos">
+            <div class="pub-campo">
+              <label for="qr-tamano">Tamaño</label>
+              <select id="qr-tamano">
+                <option value="4">Pequeño</option>
+                <option value="8" selected>Mediano</option>
+                <option value="12">Grande</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="pub-btn pub-btn-primario" id="btn-generar-qr">Generar código QR</button>
+        </form>
+
+        <div class="pub-resultado" id="resultado-qr">
+          <div style="display:flex; flex-direction:column; align-items:flex-start; gap:16px;">
+            <canvas id="qr-canvas" style="border-radius:10px; background:#fff; max-width:100%; height:auto;"></canvas>
+            <a class="pub-btn pub-btn-secundario" id="btn-descargar-qr" download="codigo-qr.png">Descargar como PNG</a>
+          </div>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Este código QR se genera completamente en tu navegador — el texto que escribas nunca se envía a ningún servidor.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/vendor/qrcode.js"></script>
+  <script src="../js/vendor/qrcode_UTF8.js"></script>
+  <script src="../js/herramientas/qr.js"></script>
+</body>
+</html>

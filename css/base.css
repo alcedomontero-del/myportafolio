@@ -1,0 +1,49 @@
+/**
+ * base.css — reset y utilidades compartidas por AMBAS identidades
+ * (cara pública oscura + admin LCARS). Nada de color ni tipografía
+ * de marca vive aquí — eso está en publico.css y admin-lcars.css.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; }
+a { color: inherit; }
+
+/* Lección #10: cualquier hijo de flex/grid que deba encogerse en
+   móvil necesita min-width:0 explícito — el navegador nunca lo
+   asume solo. Se aplica como utilidad a los contenedores que la
+   necesiten. */
+.encoge { min-width: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Foco visible — se mantiene en ambas identidades, solo cambia el color */
+:focus-visible { outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Toast global (ui.js) — estructura compartida, color por identidad */
+.toast {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translateX(-50%) translateY(20px);
+  padding: 12px 20px; border-radius: 10px;
+  font-size: 0.9rem; opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999; max-width: min(90vw, 420px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Badge de modo (ui.js) — estructura compartida */
+.mode-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+.mode-badge .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }

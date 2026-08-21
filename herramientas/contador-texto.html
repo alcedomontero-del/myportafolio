@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contador de palabras y caracteres gratis — Alcedo Montero</title>
+<meta name="description" content="Cuenta palabras, caracteres, oraciones y párrafos de cualquier texto, al instante y en tu navegador." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>📝</span> Contador de palabras y caracteres</h1>
+        <p>Pega o escribe tu texto y mira el conteo actualizarse al instante.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <div class="pub-campo">
+          <label for="ct-texto">Tu texto</label>
+          <textarea id="ct-texto" style="min-height:220px;" placeholder="Escribe o pega tu texto aquí…"></textarea>
+        </div>
+
+        <div class="pub-fila-campos" id="ct-conteos">
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-palabras">0</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Palabras</div>
+          </div>
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-caracteres">0</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Caracteres</div>
+          </div>
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-caracteres-sin-espacios">0</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Sin espacios</div>
+          </div>
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-oraciones">0</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Oraciones</div>
+          </div>
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-parrafos">0</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Párrafos</div>
+          </div>
+          <div class="pub-herramienta-panel" style="margin:0; padding:16px; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:700;" id="ct-lectura">0 min</div>
+            <div style="font-size:0.78rem; color:var(--pub-texto-suave);">Lectura estimada</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/contador-texto.js"></script>
+</body>
+</html>

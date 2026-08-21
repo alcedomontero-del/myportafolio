@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compresor de imágenes gratis — Alcedo Montero</title>
+<meta name="description" content="Reduce el peso de tus imágenes (JPEG, PNG, WEBP) sin subirlas a ningún servidor. 100% en tu navegador." />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/publico.css" />
+</head>
+<body class="publico">
+
+  <header class="pub-header">
+    <div class="pub-contenedor pub-header-fila">
+      <a href="../index.html" class="pub-logo">Alcedo Montero</a>
+      <nav class="pub-nav" aria-label="Navegación principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="../herramientas.html">Herramientas</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+      <div class="punto-estado" id="punto-estado" tabindex="0">
+        <span class="info-punto" id="info-punto"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="pub-contenedor">
+      <section class="pub-herramienta-header">
+        <a class="pub-herramienta-volver" href="../herramientas.html">← Todas las herramientas</a>
+        <h1><span>🖼️</span> Compresor de imágenes</h1>
+        <p>Reduce el peso de una foto ajustando la calidad. Compara el resultado antes de descargar.</p>
+      </section>
+
+      <section class="pub-herramienta-panel">
+        <label class="pub-dropzone" id="comp-dropzone" for="comp-archivo">
+          <span class="emoji">📤</span>
+          <p><strong>Haz clic para elegir una imagen</strong> o arrástrala aquí<br />JPEG, PNG o WEBP</p>
+          <input type="file" id="comp-archivo" accept="image/jpeg,image/png,image/webp" />
+        </label>
+
+        <div id="comp-controles" hidden style="margin-top:20px;">
+          <div class="pub-fila-campos">
+            <div class="pub-campo">
+              <label for="comp-calidad">Calidad: <span id="comp-calidad-valor">70</span>%</label>
+              <input type="range" id="comp-calidad" min="10" max="100" value="70" />
+            </div>
+            <div class="pub-campo">
+              <label for="comp-formato">Formato de salida</label>
+              <select id="comp-formato">
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/webp">WEBP</option>
+                <option value="image/png">PNG (sin pérdida)</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" class="pub-btn pub-btn-primario" id="btn-comp-generar">Comprimir imagen</button>
+        </div>
+
+        <div class="pub-resultado" id="resultado-comp" style="margin-top:24px;">
+          <div class="pub-comparacion">
+            <figure>
+              <img id="comp-img-original" alt="Imagen original" />
+              <figcaption>Original — <span id="comp-peso-original">—</span></figcaption>
+            </figure>
+            <figure>
+              <img id="comp-img-resultado" alt="Imagen comprimida" />
+              <figcaption>Comprimida — <span id="comp-peso-resultado">—</span> (<span id="comp-ahorro">—</span> menos)</figcaption>
+            </figure>
+          </div>
+          <a class="pub-btn pub-btn-secundario" id="btn-comp-descargar" style="margin-top:16px; display:inline-block;" download="imagen-comprimida.jpg">Descargar imagen comprimida</a>
+        </div>
+
+        <div class="pub-nota-privacidad">
+          🔒 Tu imagen nunca sale de este navegador — todo el procesamiento ocurre en tu computadora, no se sube a ningún servidor.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-contenedor pub-footer-fila">
+      <span>© <span id="anio-actual"></span> Alcedo Montero</span>
+      <span style="display:flex; align-items:center; gap:16px;">
+        <a class="pub-footer-paypal" id="link-paypal" href="#" target="_blank" rel="noopener" hidden>💛 Invitarme un café (PayPal)</a>
+        <span id="badge-modo"></span>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../js/env.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/boot.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/comun-publico.js"></script>
+  <script src="../js/herramientas/comprimir-imagen.js"></script>
+</body>
+</html>
