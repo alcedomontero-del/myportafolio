@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Panel administrador — Portafolio</title>
+<title>Panel De administrador — Portafolio</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/admin-lcars.css" />
@@ -103,9 +103,13 @@
             <form id="form-categoria">
               <input type="hidden" id="categoria-id" value="" />
               <div class="lcars-fila-campos">
-                <div class="lcars-campo">
+                <div class="lcars-campo lcars-campo-emoji">
                   <label for="categoria-emoji">Emoji</label>
-                  <input type="text" id="categoria-emoji" maxlength="4" placeholder="🖥️" required />
+                  <div class="lcars-emoji-selector">
+                    <input type="text" id="categoria-emoji" maxlength="4" placeholder="🖥️" required />
+                    <button type="button" class="lcars-btn-emoji" id="btn-abrir-emojis-categoria" aria-haspopup="true" aria-expanded="false">😀 Elegir</button>
+                  </div>
+                  <div class="lcars-emoji-panel" id="panel-emojis-categoria" hidden></div>
                 </div>
                 <div class="lcars-campo">
                   <label for="categoria-nombre">Nombre</label>
@@ -165,6 +169,8 @@
         </div>
         <div class="lcars-panel">
           <p>Activa o desactiva las herramientas que aparecen en el sitio público, y usa las flechas para cambiar el orden en que se muestran.</p>
+          <p style="margin-top:10px;">El catálogo es fijo — no se crean herramientas nuevas desde aquí. Si la lista de abajo está vacía (por ejemplo, en un proyecto de Firebase recién creado), usa este botón para cargar el catálogo de las 12 herramientas de una sola vez.</p>
+          <button type="button" class="lcars-btn lcars-btn-purpura" id="btn-cargar-catalogo-herramientas" style="margin-top:10px;">Cargar catálogo inicial (12 herramientas)</button>
         </div>
         <div class="lcars-lista" id="lista-herramientas"></div>
       </section>
