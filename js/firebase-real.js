@@ -42,7 +42,7 @@ import {
 
 const app = initializeApp(window.FIREBASE_CONFIG);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getFirestore(app,"default");
 
 async function subirArchivoCloudinary(archivo) {
   if (!archivo) return "";
