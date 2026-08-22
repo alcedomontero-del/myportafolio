@@ -10,11 +10,54 @@
  */
 window.cuandoDBListo(function () {
   const lista = document.getElementById('lista-herramientas');
+  const btnCargarCatalogo = document.getElementById('btn-cargar-catalogo-herramientas');
 
   function escaparHtml(texto) {
     const div = document.createElement('div');
     div.textContent = texto || '';
     return div.innerHTML;
+  }
+
+  // Catálogo fijo aprobado (ver RESUMEN-PORTAFOLIO.md). "orden" queda
+  // igual que en local-db.js: mayor número se muestra primero.
+  const CATALOGO_HERRAMIENTAS = [
+    { nombre: 'Generador de código QR', emoji: '🔳', slug: 'qr', activa: true, orden: 12 },
+    { nombre: 'Generador de contraseñas seguras', emoji: '🔐', slug: 'contrasenas', activa: true, orden: 11 },
+    { nombre: 'Compresor de imágenes', emoji: '🖼️', slug: 'comprimir-imagen', activa: true, orden: 10 },
+    { nombre: 'Redimensionador/recortador de imágenes', emoji: '✂️', slug: 'recortar-imagen', activa: true, orden: 9 },
+    { nombre: 'Convertidor de imágenes a PDF', emoji: '📄', slug: 'imagenes-a-pdf', activa: true, orden: 8 },
+    { nombre: 'Convertidor de PDF a imágenes', emoji: '🖨️', slug: 'pdf-a-imagenes', activa: true, orden: 7 },
+    { nombre: 'Extractor de texto desde una imagen', emoji: '🔤', slug: 'ocr', activa: true, orden: 6 },
+    { nombre: 'Convertidor de unidades y medidas', emoji: '📏', slug: 'unidades', activa: true, orden: 5 },
+    { nombre: 'Contador de palabras y caracteres', emoji: '📝', slug: 'contador-texto', activa: true, orden: 4 },
+    { nombre: 'Paleta de colores', emoji: '🎨', slug: 'paleta-colores', activa: true, orden: 3 },
+    { nombre: 'Creador de currículum (PDF)', emoji: '📋', slug: 'creador-cv', activa: true, orden: 2 },
+    { nombre: 'Creador de diplomas/certificados (PDF)', emoji: '🏅', slug: 'creador-diploma', activa: true, orden: 1 },
+  ];
+
+  if (btnCargarCatalogo) {
+    btnCargarCatalogo.addEventListener('click', async () => {
+      btnCargarCatalogo.disabled = true;
+      try {
+        const existentes = await window.DB.getHerramientas();
+        const slugsExistentes = new Set(existentes.map((h) => h.slug));
+        const faltantes = CATALOGO_HERRAMIENTAS.filter((h) => !slugsExistentes.has(h.slug));
+
+        if (!faltantes.length) {
+          window.mostrarToast('Las 12 herramientas ya están cargadas — no se creó nada nuevo');
+          return;
+        }
+        for (const h of faltantes) {
+          await window.DB.agregarHerramienta(h);
+        }
+        window.mostrarToast(`${faltantes.length} herramienta(s) cargada(s)`);
+        await cargarHerramientas();
+      } catch (error) {
+        window.mostrarToast(error.message || 'No se pudo cargar el catálogo', 'error');
+      } finally {
+        btnCargarCatalogo.disabled = false;
+      }
+    });
   }
 
   async function cargarHerramientas() {

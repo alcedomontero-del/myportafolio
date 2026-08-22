@@ -169,6 +169,56 @@ window.cuandoDBListo(function () {
     }
   });
 
+  // ---------- Selector de emojis (reutilizable) ----------
+  // Set curado pensado para categorías de un portafolio de desarrollo/
+  // freelance. No es exhaustivo a propósito: el campo sigue siendo un
+  // <input> de texto normal, así que quien necesite un emoji fuera de
+  // esta lista simplemente lo escribe o lo pega a mano.
+  const EMOJIS_CATEGORIA = [
+    '🖥️', '💻', '🛒', '📱', '🌐', '🎨', '📷', '🎮', '🤖', '🔐',
+    '📊', '📈', '🗂️', '⚙️', '🧰', '🧩', '📝', '📚', '🏢', '🏥',
+    '🍽️', '🏠', '✈️', '🎓', '💼', '🔔', '📅', '💬', '🛠️', '🚀',
+  ];
+
+  function inicializarSelectorEmoji(idBoton, idPanel, idInput) {
+    const boton = document.getElementById(idBoton);
+    const panel = document.getElementById(idPanel);
+    const input = document.getElementById(idInput);
+    if (!boton || !panel || !input) return;
+
+    if (!panel.childElementCount) {
+      panel.innerHTML = EMOJIS_CATEGORIA
+        .map((e) => `<button type="button" class="lcars-emoji-opcion">${e}</button>`)
+        .join('');
+    }
+
+    function cerrarPanel() {
+      panel.hidden = true;
+      boton.setAttribute('aria-expanded', 'false');
+    }
+
+    boton.addEventListener('click', () => {
+      const abrir = panel.hidden;
+      panel.hidden = !abrir;
+      boton.setAttribute('aria-expanded', String(abrir));
+    });
+
+    panel.querySelectorAll('.lcars-emoji-opcion').forEach((op) => {
+      op.addEventListener('click', () => {
+        input.value = op.textContent;
+        cerrarPanel();
+      });
+    });
+
+    document.addEventListener('click', (evento) => {
+      if (!panel.hidden && !panel.contains(evento.target) && evento.target !== boton) {
+        cerrarPanel();
+      }
+    });
+  }
+
+  inicializarSelectorEmoji('btn-abrir-emojis-categoria', 'panel-emojis-categoria', 'categoria-emoji');
+
   // ==================== CATEGORÍAS ====================
   const formCategoria = document.getElementById('form-categoria');
   const listaCategorias = document.getElementById('lista-categorias');
