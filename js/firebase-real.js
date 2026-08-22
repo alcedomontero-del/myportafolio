@@ -38,8 +38,6 @@ import {
   getDoc,
   setDoc,
   getDocs,
-  query,
-  orderBy,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const app = initializeApp(window.FIREBASE_CONFIG);
@@ -71,9 +69,17 @@ function crearColeccion(nombreColeccion, campoArchivo) {
   // (descargables) o null si esa colección no sube archivos.
   return {
     async obtenerTodos() {
-      const q = query(collection(db, nombreColeccion), orderBy("creadoEn", "desc"));
-      const snap = await getDocs(q);
-      return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      // OJO: antes esto usaba orderBy("creadoEn", "desc") directo en la
+      // consulta de Firestore. Problema real: Firestore EXCLUYE de los
+      // resultados cualquier documento que no tenga el campo usado en
+      // orderBy — y la colección "herramientas" se ordena por "orden",
+      // no por "creadoEn" (igual que local-db.js). Cualquier herramienta
+      // sin "creadoEn" desaparecía en silencio, aunque existiera en la
+      // base de datos. Ahora se leen todos los documentos sin orderBy y
+      // se ordena en el navegador exactamente igual que local-db.js.
+      const snap = await getDocs(collection(db, nombreColeccion));
+      const items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      return items.sort((a, b) => (b.orden ?? b.creadoEn ?? 0) - (a.orden ?? a.creadoEn ?? 0));
     },
     async agregar(datos, archivoOpcional) {
       const cambios = { ...datos };
