@@ -21,7 +21,7 @@
  * ---------------------------------------------------------
  */
 (function () {
-  const URL_ASISTENTE = 'https://REEMPLAZA-CON-TU-WORKER.workers.dev/';
+  const URL_ASISTENTE = 'https://asistente-alcedo.alcedomontero.workers.dev/';
   const LIMITE_CARACTERES = 400;
   const MAX_MENSAJES_HISTORIAL = 6; // últimos N turnos usuario/bot que se reenvían como contexto
 

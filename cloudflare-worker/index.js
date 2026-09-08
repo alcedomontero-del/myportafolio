@@ -19,8 +19,8 @@
 // Cambia esto por el dominio real donde vive tu portafolio.
 // Puedes poner varios (ej. el de GitHub Pages y tu dominio propio).
 const ORIGENES_PERMITIDOS = [
-  'https://alcedomontero-del.github.io',
-  // 'https://alcedomontero.do',
+  'https://alcedomontero.do',
+  'https://www.alcedomontero.do',
 ];
 
 const MODELO = '@cf/meta/llama-3.1-8b-instruct-fast';
