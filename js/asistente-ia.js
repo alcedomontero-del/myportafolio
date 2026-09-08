@@ -1,11 +1,16 @@
 /**
  * asistente-ia.js — Asistente de IA flotante (solo en index.html)
  * ---------------------------------------------------------
- * Corre 100% en el navegador del visitante usando Puter.js
- * (https://developer.puter.com) bajo su modelo "user-pays":
- * no requiere API key propia ni backend/servidor de Alcedo,
- * así que funciona en la nube sin costo para él ni límites de
- * cuota que pueda agotar.
+ * El visitante NUNCA necesita iniciar sesión ni crear cuenta.
+ * El navegador solo llama a un Cloudflare Worker propio (gratis,
+ * ver /cloudflare-worker/index.js y su README) que a su vez usa
+ * Workers AI con la cuenta de Cloudflare de Alcedo — el que se
+ * registra una sola vez es Alcedo, no cada visitante.
+ *
+ * IMPORTANTE: cambia URL_ASISTENTE por la URL real de tu Worker
+ * después de desplegarlo (ver README del Worker). Mientras diga
+ * "REEMPLAZA-CON-TU-WORKER" el chat mostrará un aviso en vez de
+ * intentar conectarse.
  *
  * El asistente SOLO conoce y SOLO habla de este portafolio
  * (proyectos, herramientas, descargables, contacto). El prompt
@@ -16,6 +21,7 @@
  * ---------------------------------------------------------
  */
 (function () {
+  const URL_ASISTENTE = 'https://REEMPLAZA-CON-TU-WORKER.workers.dev/';
   const LIMITE_CARACTERES = 400;
   const MAX_MENSAJES_HISTORIAL = 6; // últimos N turnos usuario/bot que se reenvían como contexto
 
@@ -168,14 +174,28 @@ ${contextoTexto || '(todavía cargando — si preguntan algo muy específico, su
     historial.push({ role: 'user', content: texto });
     historial = historial.slice(-MAX_MENSAJES_HISTORIAL);
 
+    if (URL_ASISTENTE.includes('REEMPLAZA-CON-TU-WORKER')) {
+      escribiendo.remove();
+      agregarMensaje(
+        mensajesEl,
+        'bot',
+        '(Nota para Alcedo: el asistente todavía no está conectado. Despliega el Worker de /cloudflare-worker y reemplaza URL_ASISTENTE en js/asistente-ia.js con su URL real.)'
+      );
+      enviando = false;
+      if (formBtn) formBtn.disabled = false;
+      return;
+    }
+
     try {
-      if (!window.puter || !window.puter.ai) {
-        throw new Error('puter-no-disponible');
-      }
       const mensajes = [{ role: 'system', content: promptSistema() }, ...historial];
-      const respuesta = await window.puter.ai.chat(mensajes);
-      const contenido = (respuesta && respuesta.message && respuesta.message.content) || '';
-      const textoFinal = contenido.trim() || 'No tengo una respuesta clara para eso — prueba preguntarme sobre los proyectos, las herramientas o el contacto.';
+      const respuestaHttp = await fetch(URL_ASISTENTE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: mensajes }),
+      });
+      if (!respuestaHttp.ok) throw new Error('respuesta-no-ok');
+      const datos = await respuestaHttp.json();
+      const textoFinal = (datos.content || '').trim() || 'No tengo una respuesta clara para eso — prueba preguntarme sobre los proyectos, las herramientas o el contacto.';
       historial.push({ role: 'assistant', content: textoFinal });
       escribiendo.remove();
       agregarMensaje(mensajesEl, 'bot', textoFinal);
@@ -184,7 +204,7 @@ ${contextoTexto || '(todavía cargando — si preguntan algo muy específico, su
       agregarMensaje(
         mensajesEl,
         'bot',
-        'No pude conectarme con el asistente en este momento (la primera vez puede pedir un inicio de sesión gratuito de Puter). Intenta de nuevo o escríbele directo a Alcedo desde la sección de Contacto.'
+        'No pude conectarme con el asistente en este momento. Intenta de nuevo en unos segundos o escríbele directo a Alcedo desde la sección de Contacto.'
       );
     } finally {
       enviando = false;
@@ -192,22 +212,5 @@ ${contextoTexto || '(todavía cargando — si preguntan algo muy específico, su
     }
   }
 
-  function cargarPuterJs() {
-    return new Promise((resolve, reject) => {
-      if (window.puter) return resolve();
-      const script = document.createElement('script');
-      script.src = 'https://js.puter.com/v2/';
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    crearWidget();
-    cargarPuterJs().catch(() => {
-      // Si Puter no carga (bloqueador de anuncios, sin internet, etc.)
-      // el botón sigue visible; el error se avisa recién al primer intento.
-    });
-  });
+  document.addEventListener('DOMContentLoaded', crearWidget);
 })();
