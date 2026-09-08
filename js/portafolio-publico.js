@@ -50,15 +50,27 @@ window.cuandoDBListo(function () {
           <div class="pub-tarjeta-cuerpo">
             ${categoriaDe(p.categoriaId) ? `<span class="pub-etiqueta-categoria">${escaparHtml(categoriaDe(p.categoriaId))}</span>` : ''}
             <h3>${escaparHtml(p.titulo)}</h3>
-            <div class="pub-caso-estudio">
+            <div class="pub-caso-estudio pub-clamp">
               <p><strong>Necesidad</strong> ${escaparHtml(p.necesidad)}</p>
               <p><strong>Qué hice</strong> ${escaparHtml(p.quehice)}</p>
               <p><strong>Resultado</strong> ${escaparHtml(p.resultado)}</p>
             </div>
+            <button type="button" class="pub-tarjeta-toggle">Ver caso completo ↓</button>
             ${p.urlProyecto ? `<a class="pub-tarjeta-link" href="${p.urlProyecto}" target="_blank" rel="noopener">Ver proyecto en vivo →</a>` : ''}
           </div>
         </article>
       `).join('')}</div>`;
+
+      // Cada tarjeta arranca "clampeada" (2 líneas por párrafo) para que
+      // la grilla se vea compacta; el botón expande/colapsa el caso
+      // de estudio completo sin recargar ni tocar el DOM de las demás.
+      contenedor.querySelectorAll('.pub-tarjeta-toggle').forEach((boton) => {
+        boton.addEventListener('click', () => {
+          const caso = boton.previousElementSibling;
+          const expandido = caso.classList.toggle('pub-clamp') === false;
+          boton.textContent = expandido ? 'Ver menos ↑' : 'Ver caso completo ↓';
+        });
+      });
     } catch (error) {
       contenedor.innerHTML = `
         <div class="pub-estado-vacio">

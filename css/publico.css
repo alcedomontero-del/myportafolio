@@ -319,6 +319,18 @@ div.pub-tarjeta-img::before {
 }
 .pub-caso-estudio { display: flex; flex-direction: column; gap: 6px; font-size: 0.87rem; color: var(--pub-texto-suave); }
 .pub-caso-estudio strong { color: var(--pub-texto); font-family: var(--pub-fuente-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+/* Clamp de 2 líneas por párrafo — mantiene la tarjeta compacta hasta
+   que el visitante pide ver el caso de estudio completo. */
+.pub-caso-estudio.pub-clamp p {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.pub-tarjeta-toggle {
+  align-self: flex-start; background: none; border: none; padding: 0;
+  color: var(--pub-acento); font-size: 0.78rem; font-weight: 600;
+  font-family: var(--pub-fuente-mono); cursor: pointer;
+}
+.pub-tarjeta-toggle:hover { text-decoration: underline; }
 .pub-tarjeta-link {
   margin-top: auto; font-size: 0.85rem; font-weight: 600;
   color: var(--pub-acento); text-decoration: none; padding-top: 8px;
@@ -618,3 +630,75 @@ button.pub-btn { border: none; }
 .publico .mode-badge { color: var(--pub-texto-suave); font-family: var(--pub-fuente-mono); }
 .publico .mode-badge.local .dot { background: var(--pub-ambar); box-shadow: 0 0 6px var(--pub-ambar); }
 .publico .mode-badge.live .dot { background: var(--pub-verde); box-shadow: 0 0 6px var(--pub-verde); }
+
+/* ---------- Asistente de IA (widget flotante) ---------- */
+.ia-boton-flotante {
+  position: fixed; right: 20px; bottom: 96px; z-index: 250;
+  width: 56px; height: 56px; border-radius: 50%; border: none;
+  background: var(--pub-oro-degradado, var(--pub-acento)); color: #14110a;
+  font-size: 1.5rem; cursor: pointer; box-shadow: var(--pub-halo-oro, 0 4px 18px rgba(0,0,0,0.35));
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease;
+}
+.ia-boton-flotante:hover { transform: scale(1.06); }
+.ia-boton-flotante .ia-punto-nuevo {
+  position: absolute; top: 2px; right: 2px; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--pub-verde, #4caf50); border: 2px solid var(--pub-bg, #0a0d13);
+}
+
+.ia-panel {
+  position: fixed; right: 20px; bottom: 96px; z-index: 260;
+  width: min(340px, calc(100vw - 32px)); max-height: min(520px, calc(100vh - 140px));
+  background: var(--pub-bg-tarjeta); border: 1px solid var(--pub-borde);
+  border-radius: var(--pub-radio); box-shadow: var(--pub-sombra, 0 8px 30px rgba(0,0,0,0.45));
+  display: none; flex-direction: column; overflow: hidden;
+}
+.ia-panel.ia-abierto { display: flex; }
+
+.ia-panel-header {
+  padding: 14px 16px; border-bottom: 1px solid var(--pub-borde);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.ia-panel-header strong { font-family: var(--pub-fuente-display); font-size: 0.98rem; }
+.ia-panel-header span { display: block; font-size: 0.74rem; color: var(--pub-texto-suave); }
+.ia-panel-cerrar {
+  background: none; border: none; color: var(--pub-texto-suave); font-size: 1.1rem;
+  cursor: pointer; line-height: 1; padding: 4px;
+}
+.ia-panel-cerrar:hover { color: var(--pub-acento); }
+
+.ia-mensajes {
+  flex: 1; overflow-y: auto; padding: 14px 16px; display: flex;
+  flex-direction: column; gap: 10px; min-height: 180px;
+}
+.ia-mensaje { max-width: 88%; padding: 9px 12px; border-radius: 12px; font-size: 0.86rem; line-height: 1.4; }
+.ia-mensaje.ia-de-usuario {
+  align-self: flex-end; background: var(--pub-acento-suave); color: var(--pub-texto);
+  border-bottom-right-radius: 3px;
+}
+.ia-mensaje.ia-del-bot {
+  align-self: flex-start; background: var(--pub-bg-elevada); color: var(--pub-texto);
+  border-bottom-left-radius: 3px; white-space: pre-wrap;
+}
+.ia-mensaje.ia-escribiendo { color: var(--pub-texto-suave); font-style: italic; }
+
+.ia-panel-form {
+  display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--pub-borde);
+}
+.ia-panel-form input {
+  flex: 1; background: var(--pub-bg-elevada); border: 1px solid var(--pub-borde);
+  border-radius: 10px; padding: 9px 12px; color: var(--pub-texto); font-size: 0.86rem;
+}
+.ia-panel-form input:focus { outline: 2px solid var(--pub-acento); outline-offset: 1px; }
+.ia-panel-form button {
+  background: var(--pub-acento); color: #14110a; border: none; border-radius: 10px;
+  padding: 0 14px; font-weight: 600; cursor: pointer; font-size: 0.86rem;
+}
+.ia-panel-form button:disabled { opacity: 0.5; cursor: default; }
+.ia-panel-nota {
+  padding: 0 16px 12px; font-size: 0.7rem; color: var(--pub-texto-suave); text-align: center;
+}
+
+@media (max-width: 480px) {
+  .ia-boton-flotante, .ia-panel { right: 12px; bottom: 84px; }
+}
